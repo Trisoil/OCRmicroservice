@@ -7,19 +7,26 @@ using System.Threading.Tasks;
 
 namespace OCRmicroservice
 {
-    static class Program
+   public static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        static void Main()
+        //static void Main()
+        //{
+        //    ServiceBase[] ServicesToRun;
+        //    ServicesToRun = new ServiceBase[]
+        //    {
+        //        new Service1()
+        //    };
+        //    ServiceBase.Run(ServicesToRun);
+        //}
+
+     public  static void Main()
         {
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[]
-            {
-                new Service1()
-            };
-            ServiceBase.Run(ServicesToRun);
+            System.Diagnostics.Debug.WriteLine("test1");
+            Console.WriteLine("test");
+            Console.Read();
         }
     }
 }
