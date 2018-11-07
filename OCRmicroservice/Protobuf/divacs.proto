@@ -1,0 +1,258 @@
+﻿syntax = "proto3";
+
+package com.paycasso.divacs.protocol;
+import "google/protobuf/any.proto";
+
+message Envelope {
+    string correlation_id = 1;
+    google.protobuf.Any payload = 2;
+}
+
+message Message {
+    string transaction_id = 1;
+    map<string, string> headers = 2;
+    oneof value {
+        ClassifyDocument classify_document = 3;
+        ClassifyOCRResult classify_ocr_result = 4;
+        StartTransactionRequest start_req = 5;
+        ProcessDocumentPartRequest process_req = 6;
+        ProcessDocumentResponse process_resp = 7;
+        ServerSuccess success_resp = 8;
+        ServerFailure failure_resp = 9;
+    };
+}
+
+message ClassifyDocument {
+    string parts = 1;
+}
+
+message ClassifyOCRResult {
+    DocumentType document_type = 1;
+    Country country = 2;
+    string description = 3;
+    map<string, string> data_region = 4;
+}
+
+message StartTransactionRequest {
+    int32 total_number_of_parts = 2;
+    string callback_uri = 3;
+    ProcessDocumentPartRequest first_part = 4;
+}
+
+message ProcessDocumentPartRequest {
+    int32 part = 2;
+    string image = 3;
+}
+
+
+message ProcessDocumentResponse {
+    Classification classification = 2;
+    DocumentData data = 3;
+    DocumentCodes warnings = 4;
+    DocumentCodes rejections = 6;
+    DocumentCodes domestic_warnings = 7;
+    string callback_uri = 5;
+}
+
+message DocumentData {
+    string source = 1;
+    repeated DataField fields = 2;
+}
+
+message DataField {
+    string value = 1;
+    repeated Tag tags = 2;
+    string name = 3;
+}
+
+enum Tag {
+    PERSON = 0;
+    DATE = 1;
+    NAME = 2;
+    FULL_NAME = 3;
+    FIRST_NAME = 4;
+    LAST_NAME = 5;
+    DATE_OF_BIRTH = 6;
+    PLACE_OF_BIRTH = 7;
+    NATIONALITY = 8;
+    PERSONAL_NUMBER = 9;
+    GENDER = 10;
+    NATIONAL_IDENTIFICATION_NUMBER = 11;
+    ADDRESS = 12;
+    STREET = 13;
+    STREET_1 = 14;
+    STREET_2 = 15;
+    STREET_3 = 16;
+    CITY = 17;
+    STATE = 18;
+    POSTCODE = 19;
+    RESIDENCE = 20;
+    DOCUMENT = 21;
+    DOCUMENT_NUMBER = 22;
+    ISSUING_STATE_OR_ORGANIZATION = 23;
+    DATE_OF_EXPIRY = 24;
+    DATE_OF_ISSUE = 25;
+    SIGN_DATE = 26;
+    VALID_FROM_DATE = 27;
+    CITIZENSHIP = 28;
+    RELIGION = 29;
+    COUNTRY = 30;
+    FRONT = 31;
+    BACK = 32;
+    NUMBER = 33;
+    CARD_NUMBER = 34;
+
+    MRZ  = 35;
+    MRZ1 = 36;
+    MRZ2 = 37;
+    MRZ3 = 38;
+    CHECK_DIGIT = 39;
+    VALID = 40;
+    TYPE = 41;
+    SUB_TYPE = 42;
+    OPTIONAL = 43;
+    OPTIONAL1 = 44;
+    OPTIONAL2 = 45;
+
+    STATUS = 46;
+    DONOR = 47;
+    VERSION = 48;
+    BARCODE = 49;
+    DYNAMIC_DATA = 50;
+    MIDDLE_NAME = 51;
+    ENDORSEMENTS = 52;
+    PLACE_OF_BIRTH2 = 53;
+    PARENTS = 54;
+
+    ROI = 99;
+
+    ROIF = 100;
+    ROIF01 = 101;
+    ROIF02 = 102;
+    ROIF03 = 103;
+    ROIF04 = 104;
+    ROIF05 = 105;
+    ROIF06 = 106;
+    ROIF07 = 107;
+    ROIF08 = 108;
+    ROIF09 = 109;
+    ROIF10 = 110;
+    ROIF11 = 111;
+    ROIF12 = 112;
+    ROIF13 = 113;
+    ROIF14 = 114;
+    ROIF15 = 115;
+    ROIF16 = 116;
+    ROIF17 = 117;
+    ROIF18 = 118;
+    ROIF19 = 119;
+    ROIF20 = 120;
+
+    ROIB = 150;
+    ROIB01 = 151;
+    ROIB02 = 152;
+    ROIB03 = 153;
+    ROIB04 = 154;
+    ROIB05 = 155;
+    ROIB06 = 156;
+    ROIB07 = 157;
+    ROIB08 = 158;
+    ROIB09 = 159;
+    ROIB10 = 160;
+    ROIB11 = 161;
+    ROIB12 = 163;
+    ROIB13 = 164;
+    ROIB14 = 165;
+    ROIB15 = 166;
+    ROIB16 = 167;
+    ROIB17 = 168;
+    ROIB18 = 169;
+    ROIB19 = 170;
+    ROIB20 = 171;
+
+    MRZ_CODE = 200;
+    MRZ01 = 201;
+    MRZ02 = 202;
+    MRZ03 = 203;
+    MRZ04 = 204;
+    MRZ05 = 205;
+    MRZ06 = 206;
+    MRZ07 = 207;
+    MRZ08 = 208;
+    MRZ09 = 209;
+    MRZ10 = 210;
+    MRZ11 = 211;
+    MRZ12 = 212;
+    MRZ13 = 213;
+    MRZ14 = 214;
+    MRZ15 = 215;
+    MRZ16 = 216;
+    MRZ17 = 217;
+    MRZ18 = 218;
+    MRZ19 = 219;
+    MRZ20 = 220;
+}
+
+message DocumentCodes {
+    repeated DocumentCode codes = 1;
+}
+
+message DocumentCode {
+    int32 code = 1;
+    string name = 2;
+    string description = 3;
+}
+
+message Classification {
+    oneof value {
+        ICAODocument icao = 1;
+        Unclassified unclassified = 2;
+		SecondaryDocument secondary = 3;
+    };
+}
+
+message ICAODocument {
+    DocumentType document_type = 1;
+    Country country = 2;
+    string description = 3;
+}
+
+message Unclassified{
+
+}
+
+enum DocumentType {
+    UnknownDocumentType  = 0;
+    IdentityCard = 1;
+    Passport = 2;
+    DrivingLicence = 3;
+	Secondary = 4;
+}
+
+enum Country {
+    UnknownCountry  = 0;
+    MYS = 1;
+    GBR = 2;
+    UKR = 3;
+    UAE = 4;
+    NZL = 5;
+    ESP = 6;
+	HKG = 7;
+	IRL = 8;
+	AUVIC = 9;
+	LTU = 10;
+}
+
+message ServerFailure {
+    string message = 1;
+    string throwable_as_string = 2;
+}
+
+message ServerSuccess {
+    string message = 1;
+}
+
+message SecondaryDocument {
+    Country country = 1;
+    string description = 2;
+}

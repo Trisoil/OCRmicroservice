@@ -24,9 +24,10 @@ namespace OCRmicroservice
 
      public  static void Main()
         {
-            System.Diagnostics.Debug.WriteLine("test1");
-            Console.WriteLine("test");
-            Console.Read();
+            Manager manager = new Manager();
+            //System.Diagnostics.Debug.WriteLine("test1");
+            //Console.WriteLine("test");
+            //Console.Read();
         }
     }
 }

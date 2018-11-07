@@ -1,0 +1,85 @@
+﻿syntax="proto3";
+
+
+enum ImageLabel {
+    DEFAULT_VALUE = 0;
+    STRICT_CANONICAL = 1;
+    APPROX_CANONICAL = 2;
+    SEGMENTATION_MAP_RAW = 3;
+    SEGMENTATION_MAP_CLEAN = 4;
+    KEYPOINT_CORRESPONDENCES = 5;
+    CLOSEST_MATCH = 6;
+}
+
+enum ResponseCode {
+    OK = 0;
+    NOT_ENOUGH_KEYPOINT_MATCHES = 1;
+    PROBLEM_LOADING_IMAGE = 2;
+    CLASSIFICATION_NOT_FOUND_IN_DATABASE = 3;
+    ABORTED = 4;
+    DB_ERROR = 5;
+}
+
+message Polaroid {
+    ImageLabel imageLabel = 1;
+    string image = 2;
+}
+
+message DataField {
+    string fieldKey = 1;
+    float x = 2;
+    float y = 3;
+    float width = 4;
+    float height = 5;
+    bool isImage = 6;
+    bool doodadFound = 7;
+	string doodadImage = 8;
+}
+
+message Request {
+    string image = 1;
+    repeated ImageLabel wanted = 2;
+    string transactionID = 3;
+    bool isSecondary = 4;
+}
+
+message Response {
+    ResponseCode responseCode = 1;
+    repeated string debuggingMessages = 2;
+    repeated Polaroid images = 3;
+    bool useStrict = 4;
+    string language = 5;
+    repeated DataField dataFields = 6;
+    string transactionID = 7;
+    string classification = 8;
+    string kind = 9;
+    string description =10;
+    string country = 11;
+}
+
+message DataFieldValuePair{
+	DataField DataField = 1;
+	string Value=2;
+}
+
+message OCRResponse{
+	repeated DataFieldValuePair DataFieldValuePairs=1;
+	string ImageLabel=2;
+}
+
+message  PayLoad{
+	Request IncomingRequest = 1;
+	Response MachineLearningResponse = 2;
+	OCRResponse BruteForceOCRResults = 3;
+	OCRResponse TargetedOCRResults = 4;
+	bool TrustStrict = 5;	
+	map<string,string> ProcessedOcrResult =6;
+	ImageLabel UsedImageLabel = 7;
+}
+
+enum ROIServices {
+    TEMPLATE_COMPARISON = 0;
+    FACE_SEARCH = 1;
+    SIGNATURE_DETECTION = 2;
+    ECHIP_DETECTION = 3;
+}

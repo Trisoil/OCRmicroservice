@@ -1,10 +1,17 @@
 ﻿using Com.Paycasso.Divacs.Protocol;
 using Confluent.Kafka;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Google.Protobuf;
+using Google.Protobuf.Collections;
+
+using System.Threading;
+using System.IO;
+using System.Drawing;
 
 namespace OCRmicroservice
 {
@@ -13,11 +20,18 @@ namespace OCRmicroservice
         private ConsumerConfig Consumerconf;
         private ProducerConfig Producerconf;
         private Action<DeliveryReportResult<Null, string>> handler;
+        static private ILog log;
         public Manager()
         {
+            log4net.Config.XmlConfigurator.Configure();
+            log = LogManager.GetLogger(typeof(Program));
+            log.Info("Start OCR");
             //configuration kfka consumer
-            Consuming();
+
             Producer();
+
+            // warning Consumer will stay in loop for ever
+            Consuming();
         }
 
         /// <summary>
@@ -25,10 +39,11 @@ namespace OCRmicroservice
         /// </summary>
         public void Consuming()
         {
+            log.Info("Start Consuming");
             Consumerconf = new Confluent.Kafka.ConsumerConfig
             {
-                GroupId = "test-consumer-group",
-                BootstrapServers = "localhost:9092",
+                GroupId = Constants.GroupID,
+                BootstrapServers = Constants.KafkaBootstrapServers,
                 // Note: The AutoOffsetReset property determines the start offset in the event
                 // there are not yet any committed offsets for the consumer group for the
                 // topic/partitions of interest. By default, offsets are committed
@@ -39,7 +54,7 @@ namespace OCRmicroservice
             using (var c = new Consumer<Ignore, string>(Consumerconf))
             {
                 //topic
-                c.Subscribe("PaoloTest");
+                c.Subscribe(Constants.ConsumerTopic);
 
                 bool consuming = true;
                 // The client will automatically recover from non-fatal errors. You typically
@@ -51,11 +66,16 @@ namespace OCRmicroservice
                     try
                     {
                         var cr = c.Consume();
-                        Envelope NewTransactio = Envelope.Parser.ParseJson(cr.Value);
+
+                        if (cr.Value!= null)
+                        {
+                            AnalyzeProtobufMex(cr.Value);
+                        }
+                        
                     }
                     catch (ConsumeException e)
                     {
-                        Console.WriteLine($"Error occured: {e.Error.Reason}");
+                        log.Error($"Error occured receiving kafka mex: {e.Error.Reason}");
                     }
                 }
 
@@ -66,17 +86,34 @@ namespace OCRmicroservice
 
 
         /// <summary>
+        /// Converting Kafka mex to Protobuf Mex
+        /// </summary>
+        /// <param name="ProtobufMex"></param>
+        public void AnalyzeProtobufMex(String ProtobufMex)
+        {
+            try
+            {
+                log.Info("New Transaction is started to be consumed");
+                Com.Paycasso.Divacs.Protocol.Envelope NewTransaction = Com.Paycasso.Divacs.Protocol.Envelope.Parser.ParseJson(ProtobufMex); // new transaction
+                StartOCR(NewTransaction);
+            }
+            catch(Exception ex)
+            {
+                log.Error("Error converting Protobuf mex", ex);
+            }
+        }
+
+        /// <summary>
         /// Configure Kafka Producer
         /// </summary>
         public void Producer()
         {
-            Producerconf = new ProducerConfig { BootstrapServers = "localhost:9092" };
+            Producerconf = new ProducerConfig { BootstrapServers = Constants.KafkaBootstrapServers };
 
             handler = r =>
                 Console.WriteLine(!r.Error.IsError
                     ? $"Delivered message to {r.TopicPartitionOffset}"
                     : $"Delivery Error: {r.Error.Reason}");
-
           
         }
 
@@ -90,7 +127,7 @@ namespace OCRmicroservice
             {
                 for (int i = 0; i < 2; ++i)
                 {
-                    p.BeginProduce("PaoloTest", new Message<Null, string> { Value = envelope.ToString() }, handler);
+                    p.BeginProduce(Constants.ProducerTopic, new Message<Null, string> { Value = envelope.ToString() }, handler);
                 }
                 // wait for up to 10 seconds for any inflight messages to be delivered.
                 p.Flush(TimeSpan.FromSeconds(10));
@@ -102,10 +139,62 @@ namespace OCRmicroservice
         /// start ocr process
         /// </summary>
         /// <param name="NewTransaction"></param>
-        public void StartOCR(Envelope NewTransaction)
+        public void StartOCR(Com.Paycasso.Divacs.Protocol.Envelope NewTransaction)
         {
             Com.Paycasso.Divacs.Protocol.Message EnvelopeMessage = Com.Paycasso.Divacs.Protocol.Message.Parser.ParseFrom(NewTransaction.Payload.Value);
-            
+
+            try
+            {
+                System.Diagnostics.Debug.WriteLine(EnvelopeMessage.TransactionId);
+                System.Diagnostics.Debug.WriteLine(EnvelopeMessage.ClassifyOcrResult.Description);
+                System.Diagnostics.Debug.WriteLine(EnvelopeMessage.ClassifyOcrResult.Country);
+
+                // Begin Testing Mode, save the images
+                if (Constants.TestingMode) // this save the original image just if OCR is set to testing mode
+                {
+                     SaveImages(ref EnvelopeMessage);
+                }
+            }
+            catch(Exception ex)
+            {
+                log.Error("errors, protobuf message has invalid vlaues:", ex);
+            }
+          
+
+        }
+
+
+        /// <summary>
+        /// Save the images to the TestImages folder if the software is in testing mode
+        /// </summary>
+        /// <param name="EnvelopeMessage"></param>
+        public void SaveImages(ref Com.Paycasso.Divacs.Protocol.Message EnvelopeMessage)
+        {
+            try
+            {
+                var imageInByte = Convert.FromBase64String(EnvelopeMessage.ClassifyDocument.Parts);
+                using (var mStream = new MemoryStream(imageInByte))
+                {
+                    Image OriginalImage = Image.FromStream((Stream)mStream);
+                    DirectoryInfo TestImages = Directory.CreateDirectory(Environment.CurrentDirectory + "\\TestImages");
+
+                    if (File.Exists("TestImages\\" + EnvelopeMessage.TransactionId.ToString() + ".png"))
+                    {
+                        if (File.Exists("TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_2.png"))
+                        {
+                            OriginalImage.Save("TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_3.png");
+                        }
+                        else
+                            OriginalImage.Save("TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_2.png");
+                    }
+                    else
+                        OriginalImage.Save("TestImages\\" + EnvelopeMessage.TransactionId.ToString() + ".png");
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+            }
         }
     }
 }
