@@ -1,0 +1,1682 @@
+[comment]
+KADMOS.UK
+Texts in English
+$Date: 07-Feb-2016 12:17 $
+
+[general]
+kadmos=6.0
+
+///////////////////////////////////
+  
+  Modules of KADMOS
+
+///////////////////////////////////
+
+[PROTECT]
+N_C01=Current version:
+N_C02=Code entry:
+N_C03=Computer ID:
+N_C04=Cancel
+N_C05=Corrupt license file: #%lX
+N_C06=Corrupt classifier file %s 
+N_D01=Demo version
+N_E01=Error #%lX
+N_H01=Help
+N_I01=Invalid license file
+N_I02=Internal error (PP API) #%lX
+N_I03=Internal error (%s failed)
+N_J01=Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec 
+N_L01=Licensing %s
+N_L02=Licensing aborted
+N_L03=Later...
+N_L05=%s %s\nLast date for authorization: %d-%s-%d
+N_N01=Next invitation to authorize KADMOS
+N_N02=Next run
+N_O01=Only %ld days left
+N_O02=Only one day left
+N_O03=of your application
+N_P01=Please copy the file %s into the directory %s
+N_P02=Please copy the file %s into the system directory or set a path
+N_P03=Preliminary authorization
+N_P04=Please contact re Recognition to get a valid trigger code
+N_P05=Product description:
+N_P06=Please enter first a valid trigger code
+N_P07=Please check your permission for registry access
+N_R01=Recognition engine %s\nExclusively licensed for\n
+N_R02=Recognition engine %s authorized.\nYou should now make a copy of the licence file %s and keep it at a safe place.
+N_S01=%s.Dll corrupt
+N_S02=%s is not licensed for the used version (%s<>%s)
+N_S03=%s %s\nExpiration date: %d-%s-%d
+N_S04=%s %s expired
+N_S05=%s not authorized for this computer
+N_S06=%s%s not found
+N_T01=The licence trigger code was incorrect\nTry again
+N_T02=This is the last day for preliminary authorization
+N_T03=Trigger code:
+N_T05=Trial time has terminated\nYou have to get a trigger code
+N_T06=Tomorrow
+N_U01=Unauthorized function call
+N_Y01=Your clock has been turned back\nPlease correct and re-run application
+N_Y02=Your maximal number of licensing attempts has been reached\nPlease contact re Recognition
+
+
+/////////////////////
+  
+  Modules of KADMOS 
+
+/////////////////////
+
+[ACGR2IMG]
+N_I01=image type not (a,c,g,r)(1,2,4)
+N_P01=re_img->pix_matrix incorrect 
+
+[AIAXKERN]
+N_N01=No features specified
+
+[BI8TOBIN]
+N_P01=bin_img->pix_matrix incorrect
+
+[BIN2GRAY]
+N_P01=bin_img->img_type incorrect
+N_P02=gray_img->pix_matrix incorrect
+
+[BIN2RGB]
+N_I01=bin_img->img_type incorrect
+N_P01=rgb_img->pix_matrix incorrect
+
+[BINTOBI8]
+N_P01=bi8_img->pix_matrix incorrect
+
+[BIN_FILT]
+N_F01=filter mode incorrect
+N_P01=in_img->img_type incorrect
+N_P02=out_img->pix_matrix incorrect
+
+[BMP]
+N_B01=BMP info header incorrect
+N_B02=BMP file %s is incorrect
+N_F01=File %s is not a BMP file
+N_I01=re_img->img_type incorrect
+N_U01=Unsupported BMP image type
+N_U02=Unsupported image type in BMP file %s
+
+[CCT2IMG]
+N_I01=bin_img->img_type incorrect
+N_P01=bin_img->pix_matrix incorrect
+N_D01=cc_tab[%d].domain too large
+N_I02=cc_tab[%d].img_size incorrect
+
+[CDO]
+N_C01=Classifier labels not 0 1
+N_C02=Classifier count not 1
+N_C03=Call re_cdo_init() first
+N_C04=Classifier not for color-drop-out (cdo)
+
+[CLP2IMG]
+N_W01=Wrong or corrupt image data
+
+[CLP2IMAG]
+N_B01=BMP info header incorrect
+N_N01=No image
+N_C01=Clipboard cannot be opened
+N_C02=Clipboard cannot be emptied
+N_C03=Clipboard cannot be set
+N_C04=Clipboard cannot be closed
+N_C05=CreateDC() failed
+N_C06=CreateDIBitmap() failed
+N_U01=Unsupported BMP image type
+
+[CODE]
+N_I01=Error in import/export from %s #%s
+N_N01=Not implemented for %s
+N_O01=%s out of range, %s=%ld
+N_U01=Unknown UNICODE %04x %04x
+N_U02=Unknown codepage %ld
+N_U03=Unknown %s for %02x %02x, %s
+N_U05=Unsupported UTF-8 code (%02x)
+N_W01=Wrong UTF-8 code (%02x)
+
+[COL_CHNG]
+N_C01=col_1 incorrect
+N_C02=col_2 incorrect
+N_C03=col_mode incorrect
+
+[COLLECT]
+N_C01=collect_data pointer==NULL
+N_C02=Collect file %s already opened
+N_C03=collect_data->image_in.img_type not BIN, BIN8, STROKE
+N_C04=collect_data->image_in.img_type not BIN or BIN8
+N_C05=collect_data->image_in.img_type not STROKE
+N_C06=Can't create file %s
+N_C07=Collect file has not been opened
+N_C08=collect_data->image_in.img_type not supported
+N_D01=Directory name too long: %s
+N_F01=File name is missing
+N_I01=image_type other than BIN, BIN8 not implemented
+N_R01=RecData pointer==NULL
+N_R02=RelData pointer==NULL
+N_R04=RecData RecInterna2 pointer==NULL
+N_R05=RelData RelInterna1 pointer==NULL
+N_R06=RelData RelInterna2 pointer==NULL
+
+[COMPARE]
+N_I01=Invalid element type
+N_I02=Invalid element length for 'in'
+N_I03=Invalid element length for 'un', 'bi' oder 'ch'
+N_I04=Invalid element length for 'fl'
+
+[COMPLIB]
+N_C01=Component number not found
+N_I01=Invalid parameter (%s)
+
+[CONVTYPE]
+N_U01=Unknown INT16 format
+N_U02=Unknown INT32 format 
+N_U03=Unknown FLOAT32 format
+N_U04=Unknown classifier type %s
+N_U05=Unknown data type %s
+
+[DISKKERN]
+N_C01=Conversion for Psl not implemented (1)
+N_C02=Conversion for Psl not implemented (2)
+N_C03=Conversion not implemented 
+
+[FOM_DO]
+N_I01=src_img->img_type incorrect 
+
+[GET_HCT]
+N_I01=re_img->img_type incorrect
+
+[GET_UREC]
+N_I01=bin_img->img_type incorrect 
+
+[GET_VCT]
+N_I01=re_img->img_type incorrect
+
+[GRAY2BIN]
+N_B01=binarisation mode incorrect
+N_P01=bin_img->img_type incorrect 
+N_P02=bin_img->pix_matrix incorrect
+
+[GRAY2RGB]
+N_P01=rgb_img->pix_matrix incorrect
+
+[HALLOC]
+N_H01=h_realloc() without h_allocr()\n%s
+N_O01=Out of memory\n%s
+
+[HASH]
+N_H01=hptr==NULL
+N_H02=hptr->p==NULL
+N_M01=More than %d labels
+
+[HUNSPELL]
+N_A01=Affix file %s incomplete. Key %s missing
+N_E01=Empty file %s
+N_I01=Internal error (%s)
+
+[IMAG2IMG]
+N_F01=Fillorder LSB2MSB for unaligned binary pixel array not supported
+N_R01=re_image->%s not %s or %s
+N_R02=re_image->%s not %s, or %s
+N_U01=Unsupported combination of re_image->color (%d) and re_img->img_type (%d)
+
+[IMAGE]
+N_C01=Color images cannot be inverted
+N_S01=Stroke images not yet supported
+
+[IMAGE_IO]
+N_A01=Append mode is not (yet) supported
+N_C01=Can't open %s file %s
+N_I01=Invalid file (%s) or not supported file format
+N_I02=Invalid file header
+N_I03=Image format not yet implemented
+N_I04=imgtype invalid
+N_I05=Invalid image size
+N_I06=Image format %s not yet implemented
+N_M01=max_width>10000 || max_height>10000
+N_N01=Not supported image format
+N_N02=Not supported or invalid mode
+N_N03=Not supported format for RAS files
+N_R01=Read error
+N_S01=Seek error
+N_T01=The %s image file format allows a single page only
+N_T02=TIFF write error
+N_T03=TIFF file read error
+N_T05=TIFF file close error
+
+[IMG2IMAG]
+N_R01=re_img->%s not %s, or %s
+N_R02=re_image->%s not %s, or %s
+N_U01=Unsupported combination of re_image->color (%d) and re_image->alignment (%d)
+
+[IMG2IMG]
+N_C01=Conversion from img_type %i to img_type %i not yet implemented
+N_I01=Invalid file header
+N_I02=%s img_type %i not yet implemented
+N_R01=re_img_s->img_type incorrect
+
+[IMG2RAS]
+N_P01=re_img->img_type incorrect
+
+[INIT_IMG]
+N_I01=re_img->img_type incorrect
+
+[ISPELL]
+N_C01=Can't update personal dictionary %s
+N_C02=Can't open file %s
+N_C03=Can't create personal dictionary %s
+N_C05=Call respell_init() first
+N_D01=Dictionary codepage (%s) not supported
+N_E01=Empty hash table %s
+N_H01=Hash table options or limits incompatible (%s>%d)
+N_H02=Hash table options or limits incompatible (%s!=0x%04x)
+N_I01=Internal error (%s)
+N_I02=Invalid hash table %s - expected magic 0x%x, read 0x%x
+N_I04=Invalid hash table (%d) %s
+N_I05=Illegal characters in word '%s'
+N_N01=No words found in hash table %s
+N_N02=No dictionary codepage specified
+N_I09=Invalid parameter (%s)
+N_O01=Out of memory (%s)
+N_O02=Out of memory for word '%s'
+N_P01=Parsing TeX math_mode<0
+N_P02=Paragraph or math_mode switch
+N_R01=Reading hash table %s
+N_T01=Truncated hash table %s:  %d bytes read, %d bytes expected
+N_U01=Unsupported code page (%s)
+N_W01=Word '%s' too long
+
+[KARLKERN]
+N_B01=16-bit-quantisation not yet implemented
+
+[LICENSE]
+N_I01=ID file creation error...
+N_L01=License authentication check failed
+N_L02=License expired. You have 4 weeks to renew/purchase the license.
+N_L03=License expired
+N_L04=License allows less number of CPUs only -> invalid configuration
+N_M01=Module not enabled
+N_M02=License activation date is earlier than current date
+N_N01=Non-matching machine id
+
+[LINES]
+N_C01=Call rep_init() first
+
+[MONITOR]
+N_R01=Rec file already closed
+N_R02=Rec file %s not yet initialized
+N_T01=Too many Rec files initialized
+N_U01=Unknown Rec file 
+
+[NOISE1]
+N_P01=cc_tab[%d].pix_sum incorrect
+N_P02=cc_tab[%d].img_size incorrect
+
+[OEMKERN]
+N_C01=Can't open Rec file %s
+N_N01=%s is no Rec file
+N_R01=Rec file %s - read error
+N_R02=Rec file %s not authorized
+N_R04=Rec file %s - write error
+
+[PCF2IMG]
+N_I01=Illegal Pcx image header (or unsupported format) in file %s
+N_P01=Pcx file %s incorrect
+
+[PICK_IMG]
+N_I01=in_img->img_type incorrect
+N_P01=out_img->pix_matrix incorrect
+
+[RASTOBMP]
+N_I01=Invalid parameter
+N_S01=startbit>7
+N_T01=typ!='a' && typ!='b'
+
+[RAS2IMG]
+N_F01=field 'bild' missing in %s
+N_P01=re_img->img_type incorrect
+N_P02=re_img->pix_matrix incorrect
+N_U01=Unsupported or invalid RAS file %s
+
+[RE_FILE]
+N_C01=Can't create file %s in mode %s
+N_C02=Can't open file %s in mode %s
+N_C03=Can't create temporary file
+N_E01=Empty filename
+N_F01=Filename==NULL
+N_F02=Filename %s too long
+N_F03=File %s not open for reading
+N_F04=File %s not open for writing
+N_F05=File not open
+N_F06=File %s, fclose failed
+N_F08=File %s, fwrite failed
+N_F09=File %s, ftell failed
+N_F10=File %s, fseek (offset:%i, whence:%i) failed
+N_F12=File %s, fgetpos failed
+N_F13=File %s, fsetpos failed
+N_F14=File %s, flush error
+N_I01=Invalid filename %s
+N_M01=More than %d files open
+N_M02=Mode invalid
+N_M03=Mode 't' not permitted
+N_P01=Parameter error (%s)
+
+[RE_INFO]
+N_C01=Call rec_init() first
+N_C02=Call rel_init() first
+N_C03=Call rep_init() first
+N_I01=Invalid parameter (%s)
+N_R01=RecData pointer==NULL
+
+[RE_JPEG]
+N_J01=JPEG file (%s) open error
+N_J03=JPEG library error
+N_O01=Only grayscale and color images supported
+N_O02=Out of memory
+
+[RE_LAYOUT]
+N_I01=Invalid parameter (%s)
+N_O01=Out of memory\n%s
+
+[RE_PAGE]
+N_I01=Invalid parameter (%s)
+N_O01=Out of memory\n%s
+
+[RE_PNG]
+N_P01=PNG file (%s) open error
+N_P02=PNG file (%s) library error
+N_P03=PNG file (%s) creation error
+N_P04=PNG library init error
+N_P05=PNG file (%s) initialization error
+N_P06=PNG file (%s) image format not yet supported
+
+[RE_THREAD]
+N_T01=thread_count>%d (MAX_THREADS). Call re_ClearThreadData() at the end of every thread
+
+[REC]
+N_C02=Call rec_init() first
+N_D01=Different structure length of %s
+N_F01=File Type of %s not 'rec'
+N_F02=File %s\nRecord %s not readable (%s)
+N_F03=Feature classifier %s can be loaded by rec_init() only
+N_I01=Invalid value (NULL) at %s
+N_I02=Invalid parameter (%s)
+N_K01=KADMOS version incorrect
+N_K02=KADMOS is already running on this computer
+N_N01=No permission to access %s (CSIDL_COMMON_APPDATA)\nPlease contact your administrator
+N_N02=No permission to access %s (CSIDL_COMMON_APPDATA)\nerrno=%d\nPlease contact your administrator
+N_O01=OPTIONS_RESTRICT_LABELS, label %04x %04x missing\nUse Chopper.exe to get a correct label set
+N_O02=OPTIONS_RESTRICT_LABELS, label %04x %04x moma-equivalence missing\nUse Chopper.exe to get a correct label set
+N_O03=OPTIONS_RESTRICT_LABELS, label %04x %04x and label %04x %04x wrong moma-equivalence\nUse Chopper.exe to get a correct label set
+N_R01=Rec file not specified
+N_R02=RecData pointer==NULL
+N_R03=Rec file %s not found
+N_R04=Rec file %s not authorized
+N_R05=Rec file %s incorrect (%s)
+N_R06=Rec file %s has wrong version (%s)
+N_R08=RecGraph pointer==NULL
+N_R09=RecResult pointer==NULL
+N_S01=Structure RecData (KADMOS version) not empty
+N_S02=Simultaneuos re?_do() calls in different threads need separate re?_init() calls for each thread
+N_U01=Unknown structure %s
+N_Z01=Zipped REC file test: RecData.init.zip_open, .zip_read, or .zip_close not specified
+
+[RECALC]
+N_N01=No labels with alc specification '0x%08x' in classifier
+N_U01=Unknown label '%02x %02x' specified
+
+[RECONFIG]
+N_A01=Alternati&ves
+N_A02=Alternative segmentation
+N_A03=ALC group selection
+N_A04=&Auto noise reduction
+N_A05=&Automatic detection
+N_A06=Arabic
+N_A07=&Accents
+N_B01=Boxes
+N_B02=Bas&ic labels parm
+N_B03=Binary filter
+N_B04=B
+N_B05=Base line (height of character A) in pixels
+N_B06=Base line is no number
+N_B07=Basi&c labels result
+N_B08=Bright
+N_B09=B&raille
+N_C01=Call rec_init() first
+N_C02=Call rel_init() first
+N_C03=Call rep_init() first
+N_C04=Config Recognizer
+N_C05=&Cancel
+N_C06=C&lassification
+N_C07=Con&text
+N_C08=Character spacing
+N_C09=Character width
+N_C10=Classifier
+N_C11=Classifier labels (disabled)
+N_C12=Classifier Configuration
+N_C13=Character position and language context
+N_C14=Character position
+N_C15=C&lear all
+N_C17=C&mc7
+N_C18=Combs
+N_C19=C
+N_C20=Color processing
+N_C21=Compound words
+N_C22=Cyrillic
+N_D01=Diameter
+N_D02=&Defined
+N_D03=Delete
+N_D04=Dark
+N_D05=&Deskew image
+N_D06=Dictionary1
+N_D08=Dictionary2
+N_E01=&Equidistant characters
+N_E02=Extended segmentation
+N_E04=E&13b
+N_E05=Edit
+N_F01=Font
+N_F02=&Fast recognition
+N_F03=F&ont selection
+N_F04=F&7b
+N_F05=Fraktur
+N_F06=Farsi
+N_F07=Font selection dictionary1
+N_F08=Font selection dictionary2
+N_F09=File %s doesn't contain parameters for %s
+N_F10=Fast grid detection
+N_G01=General
+N_G02=Grid & box detection
+N_G03=&Gestures
+N_G04=Greek
+N_G05=Gray to binary image
+N_H01=Horizontal lines
+N_H02=&Hard line context
+N_H03=Hebrew
+N_H06=&Hand print
+N_H07=H
+N_H08=Height min,max
+N_H09=Hook engine loaded
+N_H10=Hook engine active
+N_I01=Initialization
+N_I02=Invalid noise diameter (%)
+N_I03=Invalid noise diameter (pixel)
+N_I06=Invalid noise width (%)
+N_I07=Invalid noise length (%)
+N_I08=Invalid noise width (pixel)
+N_I09=Invalid noise length (pixel)
+N_I11=Invalid base line
+N_I12=Invalid minimum width
+N_I13=Invalid maximum width
+N_I14=Invalid character width
+N_I21=Invalid width
+N_I22=Invalid minimum height
+N_I23=Invalid maximum height
+N_I24=Invalid height
+N_I25=Invalid search area
+N_I26=Invalid subbox count
+N_I27=Invalid line space
+N_I29=Invalid max. length of legal words
+N_K01=KADMOS server version
+N_L01=Length
+N_L02=Line shadow only
+N_L03=Line spacing
+N_L05=&Lower case characters
+N_L07=Latin
+N_L08=Label selection
+N_L12=Lc&d
+N_L13=Left, top
+N_L14=Line space (bottom to bottom) in pixels
+N_L15=Line space is no number
+N_M01=Max. grid len
+N_M02=Max. graph len
+N_M03=Max. result len
+N_M10=Max. length of legal words
+N_M11=Min. pixels
+N_M12=Max. pixels
+N_M13=Minimum width is no positive number
+N_M14=Maximum width is no positive number
+N_M15=Maximum width < Minimum width
+N_M25=Medium
+N_M26=Machine p&rint
+N_M27=Minimum height is no positive number
+N_M28=Maximum height is no positive number
+N_M29=Maximum height < Minimum height
+N_M31=Max. length of legal words is no number
+N_M33=Max. length of legal words is negative
+N_N01=Noise reduction (%)
+N_N02=No
+N_N03=Noise reduction (pixel)
+N_N04=&No
+N_N05=Noise diameter is no number
+N_N06=Noise diameter negative
+N_N07=Noise diameter > 100 percent of stroke width
+N_N08=Noise width is no number
+N_N09=Noise width > 100 percent of Stroke width
+N_N10=Noise width negative
+N_N11=Noise length is no number
+N_N12=Noise length negative
+N_N13=No li&gatures
+N_N14=No &touching characters
+N_N15=Negative character width
+N_N16=&Numbers
+N_N17=no
+N_N19=&No line context
+N_N20=Normal &line context
+N_N23=New
+N_N24=Number of subboxes
+N_N25=No label(s) selected
+N_O01=Out of memory (%s)
+N_O02=Ocr&a
+N_O03=Ocr&b
+N_P01=&Preprocessing
+N_P02=Preprocessing
+N_P03=Preprocessing only
+N_P04=&Proportional characters
+N_P07=Phone 
+N_R01=Reject limit
+N_R02=Reject level
+N_R03=Rec Data inconsistent (
+N_R04=REL_CLEAN
+N_R05=Recognition Engine
+N_R07=&Restore from...
+N_R08=REP multithreading
+N_S01=&Segmentation
+N_S02=&Spot removal
+N_S03=Segmentation
+N_S05=Special methods
+N_S06=Select all grou&ps
+N_S07=S&elect labels..
+N_S08=Sho&w labels..
+N_S09=S&trict selection
+N_S10=Selected labels
+N_S11=&Soft line context
+N_S13=&Select all
+N_S16=&Special signs
+N_S17=Size (in pixel)
+N_S18=Search area (in pixel)
+N_S19=Structure of boxes or combs
+N_S20=Subbox count is no positive number
+N_S21=Search area left is no positive number
+N_S22=Search area top is no positive number
+N_S23=Search area width is no positive number
+N_S24=Search area height is no positive number
+N_S25=&Scaling
+N_S26=S&ave in...
+N_S27=&Semi
+N_T01=Thin
+N_T02=Thai
+N_T03=Thick
+N_T04=Type
+N_U01=Uniform
+N_U02=&Undefined
+N_U03=&Upper case characters
+N_V01=Version 
+N_V05=V
+N_V06=Vertical lines
+N_W01=Wrong version of %s
+N_W02=Width
+N_W03=Word conte&xt
+N_W04=Website 
+N_W06=Width min,max
+N_W07=Width, height
+N_Y01=&Yes
+N_Y02=Yes
+
+[REERROR]
+N_A01=... any key to continue
+N_C01=Can't set floating point error handler
+N_C02=Can't reset floating point error handler
+N_E01=Execution aborted by user
+N_W01=Wait
+
+[REL]
+N_C01=Call rel_init() first
+N_C02=Call rel_do() first
+N_I01=Invalid parameter (%s)
+N_I03=Internal segmentation error
+N_K01=KADMOS version incorrect
+N_K02=KADMOS is already running on this computer
+N_L01=(%d) Label %04x %04x (%s) is double and single character%s doublechar.h line %d, dc_double[%d][%d]==dc_first[%d][%d]
+N_L02=(%d) Label %02x %02x (%s) is double and single character%s doublechar.h line %d, dc_double[%d][%d]==dc_first[%d][%d]
+N_M01=Maximum values in rel->init.rel_graph_maxlen, rel_result_maxlen not specified
+N_M02=Maximum values rel->init.rel_graph_maxlen (=%d), rel_result_maxlen (=%d) less than max_chars (=%d)
+N_N01=No free space in rel_graph or rel_result
+N_R01=Rec file not specified
+
+[REP]
+N_C01=Call rep_init() first
+N_I01=Invalid parameter (%s)
+N_K01=KADMOS version incorrect
+N_K02=KADMOS is already running on this computer
+N_R01=Rec file not specified
+N_R02=rep->init.rep_memory_size too small
+N_R04=rep->init.rep_memory_size too small (%s)
+N_T01=Thread %lld crashed (line number=%d), results got lost
+
+[REPARM]
+N_C01=Can't create file %s
+N_F01=File %s not found
+N_I01=Invalid parameter (%s)
+N_N01=No permission to read/write file %s
+N_R01=remove/rename failed, file %s
+N_W01=Wrong item in '%s', '[%s]', %s
+N_W02=Write error, file %s
+N_W03=Wrong item %s in '%s', '[%s]', %s\nSyntax: %s
+
+[RESPELL]
+N_C05=Call respell_init() first
+N_I09=Invalid parameter (%s)
+N_O03=Only one item rel_repeat or rep_repeat can be set, not both together
+N_R01=Reading hash table %s
+N_R05=respelldata->rel_repeat not initialized
+N_R06=respelldata->rel_repeat->parm.prep&PREP_INPLACE must not be set
+N_R07=respelldata->rep_repeat not initialized
+N_R08=respelldata->rep_repeat->parm.prep&PREP_INPLACE must not be set
+N_W01=With rep_repeat also repr has to be set
+N_W02=Wrong structure of rel_graph_in
+
+[RETEXT]
+N_I01=Invalid parameter (%s)
+N_O01=Out of memory (%s)
+
+[RGB2GRAY]
+N_P01=gray_img->pix_matrix incorrect
+
+[RGBTEXT2BIN]
+N_P01=bin_img->pix_matrix incorrect
+
+[SCREEN]
+N_A01=ANSI-sequence not yet implemented: %s
+
+[SEGKERN]
+N_I01=Image too high (more than %d pixels)
+N_W01=Wrong image dimension (%d,%d)
+
+[SEGLIB]
+N_F01=FreeComponent() failed
+N_I01=Inconsistent component position
+N_U01=UnionComp() failed
+
+[SUB_IMG]
+N_I01=in_img->img_type incorrect
+N_P01=out_img->pix_matrix incorrect
+
+[TIFF2IMG]
+N_T01=TIFF write error %s (%s)
+
+[TIFFDCMP]
+N_I01=Internal error in LZW decoding
+N_I02=Internal allocation error in line %d
+N_U01=Unexpected code in line %d
+
+
+[TIFFDFAX]
+N_U01=Unexpected code in line %d
+
+[TIFFREAD]
+N_I01=Invalid Tiff header (%s) in file %s
+N_I03=Internal allocation error in line %ld
+N_I04=Invalid StripByteCount %ld in strip %ld
+N_M01=Missing tag value %s
+N_N01=Not supported %s==%i
+N_O01=Only bilevel or gray images supported (non-fitting %s)
+N_S01=%s compression not supported
+N_T01=Tiff file too large (>%uld byte)
+N_U01=Unknown compression
+N_U02=Unknown value of tag %s
+N_U03=Unknown or unsupported value of tag %s
+N_U04=Unexpected type of tag field %s
+
+[WHASH]
+N_H01=hptr==NULL
+N_H02=hptr->p==NULL
+
+[WINKERN]
+N_C01=Can't create file
+N_F01=File doesn't exist
+N_I01=Invalid command line
+
+[XML]
+N_F01=File %s is Unicode (not yet supported)
+N_W01=Write to %s failed
+
+
+////////////////////////////
+  
+  Modules of the utilities 
+
+////////////////////////////
+
+[ALC_INIT]
+N_A04=alcf incorrect
+N_C01=Classifier '%s' missing
+N_F01=File %s\n[%s] '%s'  incorrect: %s (':' missing)
+N_F02=File %s\n[%s] '%s'  incorrect: %s (part1)
+N_F03=File %s\n[%s] '%s'  incorrect: %s (part2)
+N_F04=File %s\n[%s]  Label %02x %02x (%s) not in classifier\n%s=%s
+N_F05=Font %s incorrect
+N_F06=Font=%s, label ?? %02x (%s) not found
+N_F07=Font=%s, label %02x %02x (%s) not in classifier
+N_F08=File %s\n[%s] '%s'  incorrect: %s (top>=bottom)
+N_F09=File %s\n[%s] '%s'  incorrect: %s for ALC files not supported
+N_I01=Incomplete [equivalence] rename; Please add in ALC file:\n%s
+N_L01=Label %02x %02x (%s) missing in classifier
+N_L02=Label %02x %02x (%s) from [width] %s  missing in classifier
+N_L03=Labels from [width] %s  more than once specified\n%s
+N_L04=Label %02x %02x (%s) from [words] %s  missing in classifier
+N_L05=Labels from [words] not activated\n%s
+N_L06=Label with first character 0x%02x (%s) from [segmentation] tryless  not in classifier
+N_L07=Label %02x %02x (%s) from [segmentation] tryless+  not in classifier
+N_L08=Label with first character 0x%02x (%s) from [segmentation] trymore  not in classifier
+N_L09=Label %02x %02x (%s) from [segmentation] trymore+  not in classifier
+N_S01=[slant] base  incorrect
+N_S02=[slant] label / slant  different number of groups
+N_S03=[slant] slant  incorrect
+N_S04=Section [content] cannot be combined with other ALC sections
+N_T02=Too many groups under [slant] korr
+N_W01=Wrong rename specification\nLabel %02x %02x (%s) missing in classifier
+N_W02=[width] base  incorrect
+N_W03=[width] blank  incorrect
+N_W04=[width] prop  incorrect
+N_W05=[width] equi  incorrect
+N_W06=Wrong reject labels: %s
+
+[DF_BILD]
+N_E01=Element type not implemented
+
+[DF_CONV]
+N_C01=Conversion not implemented: %2.2s%i -> %2.2s%i
+
+[DF_READ]
+N_C01=cs->mode=='I' not yet implemented
+N_D01=dimension[0]>maxdim[0]
+N_D02=dimension[1]>maxdim[1]
+N_F01=Field number invalid
+N_F02=Field number %s not in %s
+N_F03=Field %4s not in %s
+N_P01=Parameter error (%s)
+
+[DF_STR]
+N_Q01=qtyp %s not implemented
+N_Z01=ztyp %s not implemented
+
+[DF_WRITE]
+N_D01=dimension[0]>maxdim[0]
+N_D02=dimension[1]>maxdim[1]
+N_F01=File %s not open for writing
+N_F02=Field number invalid
+N_F03=Field number %s not in %s
+N_F04=Field %4s not in %s
+
+[DS_READ]
+N_F01=File %s\nFile header data inconsistent (variable dimension)
+N_F02=File %s\nVariable dimension=(%s,%s) bigger than in header information
+N_F03=File %s\nFile not open for reading
+
+[DS_SEEK]
+N_F01=File %s\nMode incorrect
+N_F02=File %s\nError in re_bseek()
+N_F03=File %s\nVariable record length - can't seek backwards
+N_F04=File %s\nFile header inconsistent (var. data field not found)
+
+[DS_WRITE]
+N_F01=File %s\nWrite error or disk full
+N_F02=File %s\nFile header inconsistent
+
+[FELDWAHL]
+N_F01=Filename wrong
+N_F02=File read error
+N_S01=Spec. string too long
+N_S02=Spec. string incorrect / bracket %c or blank missing (%s)
+N_S03=Spec. string incorrect / element type %s wrong 
+N_S04=Spec. string %s incorrect / element length %s wrong 
+
+[GETEQUI]
+N_A01=alc_title=NULL
+N_A02=*alc_title=0
+N_C01=Can't open file %s
+N_E01=entry not 'moma', 'disk', or 'rename'
+N_F01=File %s\n[%s] '%s'  incorrect: %s for ALC files not supported
+N_L01=Line too long in file %s\n%s
+N_R01=result=NULL
+N_R02=result_len<=0
+N_R03=Read error in file %s
+N_R04=result_len %d too small / line too long in file %s\n%s
+
+[INFOFELD]
+N_F01=File %s doesn't contain info field %-8.8s
+N_F02=File %s (%-8.8s) not found
+N_F03=File %s is older than file %s
+N_N01=No filename specified under %-8.8s
+N_S01=stat(%s,.) failed
+
+[KS_CHECK]
+N_F01=File %s\nCheckdata field name too long\n%s
+N_F02=File %s\nCheckdata field name %s doesn't exist\n%s
+N_F03=File %s\nBracket ) or blank missing\n%s
+N_F04=File %s\nBracket ] or blank missing\n%s
+N_F05=File %s\nElement type wrong\n%s
+N_F06=File %s\nElement length wrong\n%s
+N_F07=File %s\nDimension wrong\n%s
+N_F08=File %s\nStorage order wrong\n%s
+N_F09=File %s\nElement type/length wrong\n%s
+N_F10=File %s\nRecordlength corrected
+
+[KS_CLOSE]
+N_F01=File %s\nFile header incorrect
+N_F02=File %s\nFile header correction\nRecord length %lld\nRecord count %lld
+N_F03=File %s\nFile header correction\nRecord length %lld
+N_F04=File %s\nFile header correction\nRecord count %lld
+
+[KS_CODEP]
+N_U01=Unknown codepage %s
+
+[KS_DRUCK]
+N_F01=File type        %-8.8s
+N_H01=Header of File %s
+N_H02=Header (old) of File %s
+N_R01=Record length    %lld
+N_R02=Record count     %lld
+
+[KS_KORR]
+N_C01=cs==NULL
+N_C02=cs->p==NULL
+N_D01=dimension[0]=%s > maxdim[0]=%s
+N_D02=dimension0!=maxdim[0]
+N_D03=dimension[1]=%s > maxdim[1]=%s
+N_D04=dimension1!=maxdim[1]
+N_K01=ks_korr_data==NULL
+N_K02=ks==NULL
+N_K03=ks->p==NULL
+
+[KS_OPEN]
+N_F01=File name empty
+N_F02=File %s\nOpen mode wrong
+N_F03=File %s\nCan't access or create
+N_F04=File %s\nFile header incomplete
+N_F05=File %s\nFile header wrong
+N_F06=File %s\nCheckdata wrong
+N_F07=File %s\nDisk full
+
+[KS_SET]
+N_F01=File %s\n%s
+
+[KS_WRITE]
+N_F01=File %s\nCan't set file pointer begin of file
+N_F02=File %s\nCan't write file header
+
+[NU_FUNC]
+N_C01=Can't open number file %s
+N_C02=Can't read number file %s
+N_I01=Invalid syntax in number file
+N_I02=Invalid syntax in number string
+N_I03=Invalid interval specification in number file (%ld:%ld)
+N_I04=Invalid character '%c' in number file
+N_I05=Invalid character '%c' in number string
+N_I06=Invalid interval specification in number string (%ld:%ld)
+N_I07=Incorrect number list
+N_N01=Number string is NULL
+N_N02=Number string is empty
+N_N03=Number file doesn't start with digit
+N_N04=Number string doesn't start with digit
+N_N05=Number file %s is empty
+N_R01=Read error with number file %s
+N_S01=Sequence of digits in number file too long
+N_S02=Sequence of digits in number string too long
+
+[PARM]
+N_A01=Access not permitted: %s
+N_D01=Drive %s incorrect
+N_D03=Directory %s doesn't exist
+N_F01=File %s is input file
+N_F02=File %s doesn't exist
+N_F03=File %s already exists
+N_F04=File %s can't be processed
+N_F05=File incorrect
+N_F06=File %s can't be created
+N_F07=File %s already specified 
+N_F08=File %s has incorrect header
+N_I01=Incorrect specification:%s%s%s%s
+N_I02=Input longer than %d characters
+N_I03=Input not  %s
+N_I04=Input incorrect
+N_I05=Invalid KADMOS label %s
+N_N01=num<0 | num>=%i
+N_N02=necessary parameter not specified
+N_N03=no
+N_O01= ok
+N_O02=ok ?
+N_P01=PARM2.PROG not specified
+N_P02=Please specify numeric value
+N_P03=Please specify integer value
+N_S01=%s
+N_S02=Screen columns less than 60
+N_T01=Too much files open
+N_V01=Value lower than %s
+N_V02=Value higher than %s
+N_W01=Wildcards not permitted
+N_Y01=yes no
+N_Y02=yes
+
+[REERRORP]
+N_A01=... any key to continue
+N_C01=CPU time
+N_F01=FileName
+
+[SELECT]
+N_S01=String overflow
+N_S02=Screen columns less than 60
+
+[ZOOM_IMG]
+N_I01=in_img->img_type incorrect
+N_P01=out_img->pix_matrix incorrect
+
+
+////////////
+  
+  Utilites  
+
+////////////
+
+[ALCFILL]
+N_A01=Alx file(s) (input)
+N_A02=\n... %d Alc file(s) generated%s
+N_A03=\n*** %d Alc file(s) with errors%s
+N_E01=Extension '%s' not permitted
+N_F01=File not found
+N_F02=File is no Rec file
+N_N01=No Alx file found
+N_O01=Output extension
+N_R01=Rec file    (input)
+N_W01=Wildcards in extension not permitted
+
+[ALCSTRIP]
+N_A01=Al0 file(s)  *.al0
+N_A02=\n... %d %s file(s) processed%s
+N_E01=Extension '%s' not permitted
+N_N01=\n*** No %s file found%s
+N_O01=Output extension
+N_T01=The file %s is too large (>%uld byte)
+N_W01=Wildcards in extension not permitted
+
+[ALCTOKEN]
+N_A01=Alc file       (in)
+N_C01=Can't open alc file %s
+N_C02=Can't create label file %s
+N_C03=Codepage label file
+N_C04=Can't create list file %s
+N_F01=File %s\n[%s] '%s'  wrong: %s is not supported for alc files
+N_I01=Incompatible code pages of Ras- an Alc-file: %s, %s
+N_L01=Label file    (out)
+N_L02=List file     (out)
+N_M01=Mode
+N_R01=Ras/.. file    (in)
+N_V01=Variable label size not supported
+N_W01=Wrong label %02x %02x (%s) in [%s] font
+N_W02=Wrong label %02x %02x (%s) in [%s] font+
+N_W03=Write error in label file %s
+
+[AUSWAHL]
+N_C01=Can't open label file
+N_F01=\n... File %s contains %lld records%s
+N_F02=\n... File %s contains 1 record%s  
+N_F03=\n... File %s is empty and will be deleted%s
+N_I01=Input file
+N_I02=Input file is empty
+N_I03=Input file is corrupted
+N_L01=label field
+N_L02=label file (@..)
+N_L03=label file is empty
+N_L04=label string is empty
+N_N01=number field
+N_N02=number file (@..)
+N_N03=Neg. output file
+N_N04=number string is empty
+N_O01=Options
+N_P01=Pos. output file
+N_R01=Records per label
+
+[CHOPPER]
+N_A01=Alc file    (Input)
+N_A02=Additional dialog
+N_A03=Alc file   (Output)
+N_A05=alc=%s unknown
+N_A06=Alc file %s not authorized (checksum error)
+N_A07=Alc file too large (>%uld byte)
+N_A08=Alc file %s is corrupted
+N_A09=[accent]   accents
+N_C01=Can't create Alc file %s
+N_C03=Can't write to Alc file %s
+N_E01=[equivalences] moma from %s are ignored
+N_E02=[equivalence]  disk
+N_E03=[equivalence]  rename
+N_F01=[fontgroup]    ...
+N_F02=FILECRC failed
+N_F03=File is not a Rec file
+N_F04=Font %s unknown
+N_F05=Font=%s, too many labels
+N_F07=File %s\n[%s] '%s'  incorrect: %s for Alc files not supported
+N_G01=[gesture]  gestures
+N_I01=Invalid label %2.2s in Alc file %s
+N_I02=Invalid parameter (%s)
+N_I03=Internal error (%s)
+N_L01=Label %2.2s in more than one class [equivalence] moma
+N_L02=Label %2.2s in classifier - [equivalence] moma impossible
+N_L03=Label %2.2s not in classifier - [equivalence] moma impossible
+N_L04=[lcalpha]  lower case alpha
+N_L05=Label(s) %s not in classifier - [reject] labels
+N_L06=Label file (Output)
+N_M01=More than 32 classes [equivalence] disk
+N_M02=More than 32 labels in one class [equivalence] moma/disk
+N_N01=[numeric]  numeric
+N_N02=No labels specified
+N_N03=New label %s can't be reject label
+N_N04=No classifiers available for the selected labels
+N_N05=No classifiers available for the selected labels '%s'
+N_R01=Rec file    (Input)
+N_R02=Rec file   (Output)
+N_R04=Rec file %s contains no Alc information
+N_R05=[reject]   avoid substitutions
+N_S01=[special]  special signs
+N_S02=Selection of [lcalpha] - lower case alpha
+N_S03=Selection of [ucalpha] - upper case alpha
+N_S04=Selection of [numeric] - numeric
+N_S05=Selection of [special] - special signs
+N_S06=Selection of [gesture] - gestures
+N_S07=Selection of [content] - labels
+N_S08=Selection of [accent] - accents
+N_S10=[slant]        slant
+N_S11=[slant]        korr
+N_S12=[segmentation] tryless
+N_S13=[segmentation] trymore
+N_S14=Selection of [reject] - avoid substitutions
+N_T02=Too many labels
+N_T03=Too many groups [equivalence] %s for destination classifier
+N_T04=Too many groups or labels [equivalence] %s for destination classifier
+N_T05=Too many labels under %s for destination classifier
+N_U01=Use/edit Alc defaults from %s
+N_U02=[ucalpha]  upper case alpha
+N_U03=Use 'size' defaults from %s
+N_U04=Use 'xminmax' defaults from %s
+N_U05=Use 'yminmax' defaults from %s
+N_U06=Use remaining defaults from %s
+N_U07=Unsolvable [equivalence] %s %2.2s
+N_U08=Unresolved equivalences\n    %s
+N_W01=[width]        equidistant
+N_W02=[width]        proportional
+N_W03=[words]        lcalpha
+N_W04=[words]        ucalpha
+N_W05=[words]        numeric
+N_Y01=(yes no)
+N_Y02=yes
+
+[CSORT]
+N_F01=fsrt entry %s deleted
+N_I01=Input file
+N_N01=No free info field. Use KS_EDI to mark sort information
+N_N02=No sortable data field in file
+N_O01=Output file
+N_S01=sort field
+N_S02=sort entry %s deleted
+
+[DRUCK]
+N_D01=Data field(s)
+N_F02=field already specified above
+N_F03=File doesn't contain a genuine data field
+N_I01=Input file
+N_L01=label field
+N_L02=  label selection
+N_N01=number field
+N_N02=  number file or @..
+
+[DSORT]
+N_E01=Element length of image data not 1 or 8
+N_I01=Input file
+N_I02=Input file not sorted for '%-8.8s'
+N_I03=Input file not sorted
+N_M01=Missing label field in input file
+N_M02=Missing data field of variable length
+N_N01=No free info field. Use KS_EDI to mark sort information
+N_O01=Output file
+
+[ERSEKENN]
+N_F01=File %s doesn't contain a label field
+N_F02=File %s doesn't contain a ch-field 'kken'
+N_I01=Input file
+N_N01=number field
+N_N02=number file (@..)
+N_N03=number field not found
+N_N04=\n... No labels translated%s
+N_L01=label field
+N_L02=label field not found
+N_L03=\n... %ld labels translated%s
+N_O01=Output file
+N_O02=\n... One label translated%s
+N_T01=Translation file (@..)
+N_T02=Translation file too large (>%uld)
+N_T03=\n... The following labels have not been found:%s\n    %s
+N_U01=Uneven number of translation labels
+
+[FAMULUS]
+N_A01=Application is still active
+N_A02=Automatic filenames
+N_A03=About KADMOS
+N_A04=Automatic File Names
+N_A05=Another application has changed the image file
+N_A06=Area width
+N_A07=All
+N_B01=bmp 
+N_B03=2-byte results
+N_C01=Collect &Ras/Vect\tCtrl+R
+N_C02=Collect Ras/Vect &full\tCtrl+A
+N_C03=&Config
+N_C04=&Copy\tCtrl+C
+N_C05=Collect Ras/Vect images
+N_C06=Collecting images in file\n  %s.\n\nStop collection?
+N_C07=&Clear
+N_C08=&Cancel
+N_C09=Change image file
+N_C10=Copy to clipboard failed
+N_C11=Codepage %d
+N_C12=Character count
+N_C13=Character height
+N_C14=Character width
+N_C15=characters per second
+N_C16=Cdo
+N_C17=Collect Ras/Vect &bad\tCtrl+B
+N_D01=Do you want to use a different Editor?
+N_D02=degrees
+N_E01=E&xit
+N_E02=&Edit
+N_E03=Edit image resolution
+N_E04=Empty image
+N_E05=Edit subimage boundaries
+N_E06=Empty or unsupported image file
+N_F01=&File
+N_F02=File error
+N_F06=F&ont
+N_G01=GenerateFileName failed
+N_G02=Gray image
+N_H01=handprint 
+N_H02=handprint numeric 
+N_I01=&Image file\tCtrl+I
+N_I02=&Invert\tAlt+I
+N_I03=Internal error
+N_I04=Invalid RelFind() parameter
+N_I10=Image resolution
+N_I11=Image after preprocessing
+N_I12=Image after color-drop-out
+N_I13=Info
+N_I14=Image found by layout analysis
+N_L01=Load classifier
+N_L02=lcd 
+N_L03=Load Image File
+N_L04=left, top
+N_L05=Load dictionary1
+N_L06=Load dictionary2
+N_L07=Load cdo classifier
+N_L08=Layout
+N_L10=Layer 0
+N_L11=Layer 1
+N_L12=Layer 2
+N_L13=Layer 3
+N_L14=Layer 4
+N_L15=Layer 5
+N_L16=Layer 6
+N_M01=machineprint 
+N_M02=machineprint numeric 
+N_N01=No image provided
+N_N02=Next image
+N_N03=%s - nothing found
+N_N04=Noise
+N_N05=No classifier provided
+N_O01=Out of memory
+N_O02=&Overview\tAlt+O
+N_O03=ocra
+N_O04=Out of memory (CreateDIBitmap()) for image after preprocessing 
+N_P01=&Paste\tCtrl+V
+N_P02=&Print
+N_P03=P&rint setup...
+N_P04=Print text
+N_P05=Previous image
+N_P06=Preprocessed image
+N_P07=Page
+N_R01=Re&p
+N_R02=Recognition Result
+N_R03=Recognition failed
+N_R04=Reload image
+N_R05=Re&l
+N_R06=&Rec
+N_R07=Reject
+N_R08=&Rotate\tAlt+R
+N_R09=Rotate image
+N_R10=Rec&Accent
+N_R11=Rel&Find
+N_R12=RelFind parameters
+N_R13=RelFind() parameter %s is bigger than %d
+N_R14=RelFind() parameter %s is negativ
+N_R15=Restore
+N_R16=Reject rates
+N_R17=Reject rates
+N_R18=Recent
+N_R19=Reset/Delete
+N_R20=&Result image
+N_S01=Save hand
+N_S02=Save hand numeric
+N_S03=Save machine
+N_S04=Save machine numeric
+N_S05=Save Ocra
+N_S06=Save Lcd
+N_S07=Save as...
+N_S08=Save %simage as...
+N_S09=SaveImage failed
+N_S10=Save
+N_S11=Save text file
+N_S12=Subimage
+N_S13=Speed
+N_S14=Save text (%s) as...
+N_S15=Save XML as...
+N_S16=Save XML file
+N_U01=Unload dictionary1
+N_U02=Unload dictionary2
+N_U03=Unable to start print job
+N_U04=Unicode
+N_U05=Unload cdo classifier
+N_U06=Used ini file
+N_V01=&View
+N_W01=width, height
+N_X01=x resolution (dpi)
+N_Y01=y resolution (dpi)
+
+[FELDMIX]
+N_D01=data fields
+N_F01=file type
+N_F02=field '%-8.8s' selected twice
+N_I01=Input file 1
+N_I02=Input file 2
+N_O01=Output file
+N_R01=Record count is different
+N_R02=\n... %lld records written
+N_S01=select variable field from second file only
+N_T01=Too many fields selected (more than %d)
+
+[HASHMAKER]
+N_A01=Affix file  (in)
+N_A02=Affix file (out)
+N_C01=Code page group
+N_C02=Can't create file %s
+N_D01=Dictionary codepage (%s) not supported
+N_D02=Different flagmarkers in list file %s and %s
+N_E01=Empty list files %s and %s
+N_E02=Empty list file %s
+N_F01=File is not a hash file, corrupted, or incorrect
+N_H01=Hash file   (in)
+N_H02=Hash file  (out)
+N_L01=List file   (in)
+N_L02=List file  (out)
+N_N01=No codepage specified; flagmarkers missing in list file %s
+N_S01=System function %s failed
+N_U01=Unknown captype 0x%8.8x for word %s
+N_W01=Wrong character in file %s, line %d
+
+[INFO]
+N_C01=Correcting record count from %s to %s
+N_C02=Correcting variable dimension
+N_C03=Correcting record length from %s to %s
+N_E01=Empty file
+N_E02=%d empty labels substituted by ??
+N_E03=%d empty second byte of labels substituted by ' '
+N_F01=File
+N_F02=Field %s doesn't exist
+N_F03=Field 'moma' doesn't exist
+N_G01=Grouping
+N_K01=KADMOS incompatible labels
+N_L01=Label field
+N_L02=Label field 'kenn' missing
+N_L03=Label field 'kenn' not of type 'ch' or 'un'
+N_L04=Label field 'kenn' not of type 'ch16'
+N_L05=Wrong label %02x %02x (%s) in record %ld
+N_L06=Label field 'kenn' not of type 'ch16' or 'un16 (2)'
+N_L07=Wrong label %04x %04x (%s) in record %ld
+N_L08=labels
+N_O01=Overview
+N_O02=Overview (contained samples)
+N_R01=Record %lld\n
+N_S01='sort' information filled in
+N_S02='sort' information removed
+
+[KENTOALC]
+N_A01=Alc file  (output)
+N_C01=Can't get temporary Alc file name
+N_C02=Can't open temporary Alc file
+N_C03=Can't open Label file
+N_C04=Can't get temporary Rec file name
+N_F01=File not found
+N_F02=File is no Rec file
+N_L01=Label file (input)
+N_R01=Rec file   (input)
+N_R02=Read error with Label file
+
+[MAKE_IRFAN]
+N_A01=A directory name must be specified
+N_C01=1. Classifier file(s)
+N_C02=2. Classifier file(s)
+N_C03=3. Classifier file(s)
+N_C04=4. Classifier file(s)
+N_F02=%s failed
+N_L01=Language
+N_O01=Output directory (uncompressed)
+N_O02=Output directory   (compressed)
+N_P01=Program name
+N_S01=Source directory
+N_S02=Setup file (output)
+N_V01=Variant
+N_W01=WinExec(%s) failed
+
+[MAKE_SETUP]
+N_D01=Dll subdirectories
+N_F01=1. file(s)  (input)
+N_F02=2. file(s)  (input)
+N_F03=3. file(s)  (input)
+N_F04=4. file(s)  (input)
+N_F05=5. file(s)  (input)
+N_F06=%s failed
+N_I01=Installation dir
+N_L01=Language
+N_O01=Options
+N_P01=Program name
+N_P02=Post install exe
+N_S01=Setup file (output)
+
+[MULTI]
+N_A01=A file %s doesn't exist
+N_C01=Can't access file %s
+N_C02=Can't create directory %s (err=%d)
+N_C03=CreateProcess() %s failed
+N_E01=Error in program execution, file %s
+N_E02=Execution error %s. File:\n      %s
+N_E03=Execution error %s. Files:\n      %s\n      %s
+N_E04=Execution error %s. Files:\n      %s\n      %s\n      %s
+N_E05=Execution
+N_I01=\n%sIn the following menu write '@@' before input and output file names\r\n%s\n%s
+N_I02=Input file(s)  %s  not found
+N_M01=More than three wildcard files specified (@@)
+N_P01=Program
+N_S01=(sequential multithreaded)
+N_S02=(sequential)
+N_T01=The file %s is empty
+N_T02=The file %s has no file header
+N_T03=The file %s has no records
+N_T04=The file doesn't exist
+N_W01=%s - wrong parameter setting (err=%d)
+
+[MULTI_GKLAS]
+N_C01=Can't access file %s
+N_C02=Can't create file %s
+N_C03=CreateProcess %s failed. Files:\n      %s\n      %s
+N_E01=Execution error %s. Files:\n      %s\n      %s
+N_G01=\n%s... %d GKLAS calls %s with %d basic classifiers each
+N_L01=%s    %lld liststrings generated
+
+[NORM]
+N_F01=Field 'miwe' not of type 'fl'
+N_F02=Field 'sigm' not of type 'fl'
+N_F03=Field dimension bigger than 32767
+N_F04=Field 'kenn' not of type 'ch'
+N_F05=File type not 'stat' (%-8.8s)
+N_F06=Field 'miwe' missing or not of type 'fl32' or 'fl64'
+N_F07=Field 'sigm' missing or not of type 'fl32' or 'fl64'
+N_N01=norm file (output)
+N_O01=Output data fields
+N_R01=Read error in stat file
+N_S01=stat file  (input)
+N_S02=Sigma minimum (global)
+N_S03=Sigma minimum per label
+N_S04=Sum label '**' missing
+N_T01=The fields 'miwe' and 'sigm' have different dimensions
+N_T02=The stat file %s is empty
+
+[OEM]
+N_A01=Authorized licenses:
+N_F01=filecrc incorrect in %s
+N_F02=Field 'logo' missing in %s
+N_F03=Field 'oem' missing in %s
+N_F04=Field 'cust' missing in %s
+N_L01=License
+N_L02=License syntax error. Enter HELP or ? for overview.
+N_N01=No authorized license. Enter HELP or ? for overview.
+N_R01=Rec file(s)
+
+[PURGE]
+N_D01=double removed
+N_E01=Empty input file
+N_I01=Input file
+N_I02=Input file not sorted
+N_I03=Input file not fine sorted for '%s'\nRun DSORT first
+N_M01=Missing label field in input file
+N_N02=No image field in file
+N_N03=No supported image field in file
+N_N04=no double found
+N_O01=Output file
+N_O02=one double removed
+N_R01=records written
+
+[RASPREP]
+N_C01=Can't access file
+N_I01=Ras files (in)
+N_L01=label field
+N_O01=Ras file (out)
+N_W01=%s failed
+
+[RASSTAT]
+N_A01=Alc file    (in)
+N_C01=Can't open alc file %s
+N_E01=Element length of image data not 1 or 8
+N_E02=Empty file
+N_F01=File %s\n[%s] '%s'  wrong: %s is not supported for alc files
+N_I01=image field
+N_I02=Image file (out)
+N_I03=Image files generated
+N_L01=label field
+N_M01=Missing label field in input file
+N_M03=Missing image field in input file
+N_N01=No valid labels in file
+N_R01=Ras-file    (in)
+
+[RASTRANS]
+N_F01=File %s is empty
+N_I01=Input file
+N_I02=image field
+N_I03=image field %s not found
+N_O01=Output file(s)
+N_R01=Reflection
+N_R02=(- right/left top/bottom)
+N_R03=right/left
+N_R04=\n... %lld records written
+N_S01=Skew (degrees)
+N_T01=top/bottom
+N_T02=The file doesn't contain a 'bi1' image field
+
+[RASTRIM]
+N_E01=Empty input file
+N_I01=Input file   
+N_I02=Input file has no image field of variable length
+N_I03=Image field has no supported data type
+N_N01=No record found with valid image
+N_N02=Noise (width, length)
+N_O01=Output file
+N_O02=One record written with valid image
+N_R01=records written with valid images
+N_S01=Storage type of raster image not (1,2)
+N_V01=Vector images not supported
+
+[REC_LINKER]
+N_I01=1st input rec file
+N_I02=2nd input rec file
+N_I03=3rd input rec file
+N_I04=4th input rec file
+N_I05=5th input rec file
+N_I06=6th input rec file
+N_O01=Output rec file
+N_R01=Rec files 0 and %d incompatible (%s%s)
+N_R02=Rec files %d and %d incompatible (%s%s)
+N_W01=Wrong moma equivalence in rec file %s
+N_W02=Wrong moma equivalence in rec file %s  %s %s
+N_W03=Wrong coding in rec files
+
+[RECMAKER]
+N_C01=Classifiers
+N_C02=Can't read %s
+N_C04=Checksum missing in %s
+N_D01=Directory
+N_D02=Destination
+N_D03=&Deselect all
+N_D04=Don't generate this classifier
+N_E01=&Exit
+N_E02=Error: Classifier %s not generated
+N_F01=File %s empty
+N_F02=File %s corrupt
+N_G01=&Generate
+N_G02=Generate the classifier and overwrite the existing one
+N_G04=Generating %s
+N_H01=Header in %s corrupt
+N_O01=OK
+N_P02=Press Esc to stop the process
+N_P03=Process canceled by user
+N_S01=Source
+N_S02=Select &all
+N_S03=Source groups
+N_S04=Select a destination classifier first
+N_S05=Search for source classifier directory
+N_S06=Search for destination classifier directory
+N_T01=The classifier %s already exists
+N_U01=Use the current choice for all existing classifiers
+
+[SICHTEN]
+N_A01=Allocation problems\nPossible cause:
+N_A02=About KADMOS
+N_A03=ASCII labels
+N_C01=&Config
+N_C02=Colored bitmaps not supported
+N_C05=Collect raster images
+N_E01=E&xit
+N_E02=&Edit
+N_E03=Empty Ras/Vec file
+N_E04=Edit
+N_E05=Edit zoom (max=8)
+N_F01=&File
+N_G01=Good threshold
+N_H01=height:%d-%d  width:%d-%d
+N_I01=Images vertical
+N_I02=Images horizontal
+N_I06=Info
+N_I07=Internal error
+N_I08=Image number
+N_I09=Invalid type of the Ras/Vec file
+N_I10=Image field
+N_I11=Image distance
+N_L01=Load classifier
+N_L02=Load Ras/Vec file
+N_L03=&Layout
+N_L04=Line mode
+N_N01=No image found
+N_N02=No data field of type '(-?:2) un8' or '(-?:8) in32' in the Vec file
+N_N03=No data field of type 'un8 in8 bi1 bi4' in the Ras file
+N_N04=&Number
+N_O01=%lld of %lld
+N_O02=Ok
+N_O03=Open Collect file
+N_R01=&Ras/Vec file
+N_R02=Re&c file
+N_R03=Raster image file incorrect\nRun program Info.exe to correct the file
+N_R04=rec_do() failed
+N_R05=Ras/Vec file too big
+N_R07=Ras/Vec file is sorted
+N_S02=Set F1-F8
+N_S03=Screen layout
+N_S04=Show
+N_T01=Too many image changings\nPlease restart SICHTEN
+N_U01=Used ini file
+N_U02=Unnown image type
+N_U03=Undo
+N_Z01=Zoom (max=8)
+
+[STAT]
+N_C01=Code page %s of file %s not supported
+N_F01=Feature file
+N_F02=File type not 'stat'
+N_L01=label field
+N_L02=label field is unused in this stat file
+N_L03=label field is used in this stat file
+N_M01=merk field
+N_P01=psl file or @..
+N_P02=psl file wrong
+N_R02=Read error in stat file
+N_S01=stat file  (input)
+N_S02=stat file (output)
+N_S05=stat file is incompatible (header)
+N_S06=Statistics with Psl implemented for 8-bit or 16-bit quantisation only
+N_T02=The file doesn't contain numeric data fields
+
+[STIPGEN]
+N_C01=Character distance    (mm)
+N_C02=Character width       (mm)
+N_C03=Character height      (mm)
+N_C04=character width > character distance
+N_C05=character width > %d pixel
+N_C06=character distance > image width
+N_C07=character height > line distance
+N_C08=character height > %d pixel
+N_C09=Character distance (pixel)
+N_C10=Character width    (pixel)
+N_C11=Character height   (pixel)
+N_E01=Empty image %d in file %s
+N_I01=Input image file
+N_I02=Invalid image type
+N_L01=Label
+N_L02=Line distance         (mm)
+N_L03=line distance > image height
+N_L04=Line distance      (pixel)
+N_M01=Metric
+N_O01=Output ras file
+N_R01=\n... %lld records written%s
+N_T01=\n... The ras file %s is empty and has been deleted%s
+
+[UNINSTALL]
+N_A01=All KADMOS specific keys in the Windows registry have been deleted.
+N_A02=\nAll KADMOS specific files in the Windows system directory have been deleted.
+N_C01=Cannot delete the key 're Recognition GmbH\\Kadmos'. Another KADMOS version is registered.
+N_C02=Cannot delete the key 're Recognition GmbH'. Another re Recognition software is registered.
+N_C03=Click OK to delete all KADMOS specific entries in the Windows registry and all KADMOS specific files in the Windows system directory.
+N_N01=No KADMOS entries found in the Windows registry.
+N_N02=\nNo KADMOS specific files found in the Windows system directory.
+N_T01=\nThe KADMOS specific files remain in the Windows system directory since the undelete version is different from the actual one.
+
+[VERBUND]
+N_D01=Data fields of output file
+N_F01=from
+N_I01=1st input file
+N_I02=2nd input file
+N_I03=3rd input file
+N_I04=4th input file
+N_I05=5th input file
+N_I06=Number field has invalid format
+N_N01=  Number field
+N_N02=No common data field found
+N_N03=No room for number field
+N_O01=Output file
+N_O02=Omitted data fields
+N_R01=records written
+N_S01=Sorting output file for field
+N_T01=The output file will be enumerated (new field
+N_T02=The output file will be enumerated
+
+[WVERBUND]
+N_C01=Can't access file
+N_F01=File name longer than %d characters
+N_I01=Input files
+N_O01=Output file
+N_M01=More than 4000 input files
+N_N01=No input file found
+N_V01=VERBUND /b WVERB failed

@@ -1,0 +1,48 @@
+%!PS-Adobe-3.0 Resource-CMap
+%%DocumentNeededResources: procset CIDInit
+%%DocumentNeededResources: CMap UniCNS-UCS2-H
+%%DocumentNeededResources: CMap UniCNS-UCS2-V
+%%IncludeResource: procset CIDInit
+%%IncludeResource: CMap UniCNS-UCS2-H
+%%IncludeResource: CMap UniCNS-UCS2-V
+%%BeginResource: CMap UniCNS-UTF16-V
+%%Title: (UniCNS-UTF16-V Adobe CNS1 3)
+%%Version: 1
+
+/CIDInit /ProcSet findresource begin
+
+12 dict begin
+
+begincmap
+
+/UniCNS-UCS2-V usecmap
+
+/CIDSystemInfo 3 dict dup begin
+  /Registry (Adobe) def
+  /Ordering (CNS1) def
+  /Supplement 3 def
+end def
+
+3 begincodespacerange
+  <0000> <D7FF>
+  <D800DC00> <DBFFDFFF>
+  <E000> <FFFF>
+endcodespacerange
+
+/CMapName /UniCNS-UTF16-V def
+
+/CMapVersion 1 def
+/CMapType 0 def
+
+/XUID [1000000 4] def
+
+/WMode 1 def
+
+endcmap
+
+CMapName currentdict /CMap defineresource pop
+
+end
+end
+%%EndResource
+%%EOF

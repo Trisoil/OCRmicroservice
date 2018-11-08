@@ -85,80 +85,105 @@
     <Reference Include="Google.Protobuf, Version=3.4.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.4.0\lib\net451\Google.Protobuf.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools">
-      <HintPath>..\packages\Leadtools20\Leadtools.dll</HintPath>
+    <Reference Include="Leadtools, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Annotations.Engine">
-      <HintPath>..\packages\Leadtools20\Leadtools.Annotations.Engine.dll</HintPath>
+    <Reference Include="Leadtools.Annotations.Engine, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Annotations.Engine.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Barcode">
-      <HintPath>..\packages\Leadtools20\Leadtools.Barcode.dll</HintPath>
+    <Reference Include="Leadtools.Barcode, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Barcode.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Barcode.OneD">
-      <HintPath>..\packages\Leadtools20\Leadtools.Barcode.OneD.dll</HintPath>
+    <Reference Include="Leadtools.Barcode.OneD, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Barcode.OneD.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Codecs">
-      <HintPath>..\packages\Leadtools20\Leadtools.Codecs.dll</HintPath>
+    <Reference Include="Leadtools.Codecs, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Codecs.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Codecs.Png">
-      <HintPath>..\packages\Leadtools20\Leadtools.Codecs.Png.dll</HintPath>
+    <Reference Include="Leadtools.Codecs.Png, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Codecs.Png.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.ColorConversion">
-      <HintPath>..\packages\Leadtools20\Leadtools.ColorConversion.dll</HintPath>
+    <Reference Include="Leadtools.ColorConversion, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.ColorConversion.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Document.Writer">
-      <HintPath>..\packages\Leadtools20\Leadtools.Document.Writer.dll</HintPath>
+    <Reference Include="Leadtools.Document.Writer, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Document.Writer.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Drawing">
-      <HintPath>..\packages\Leadtools20\Leadtools.Drawing.dll</HintPath>
+    <Reference Include="Leadtools.Drawing, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Drawing.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Forms.Commands">
-      <HintPath>..\packages\Leadtools20\Leadtools.Forms.Commands.dll</HintPath>
+    <Reference Include="Leadtools.Forms.Commands, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Forms.Commands.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Forms.Common">
-      <HintPath>..\packages\Leadtools20\Leadtools.Forms.Common.dll</HintPath>
+    <Reference Include="Leadtools.Forms.Common, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Forms.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Forms.Processing">
-      <HintPath>..\packages\Leadtools20\Leadtools.Forms.Processing.dll</HintPath>
+    <Reference Include="Leadtools.Forms.Processing, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Forms.Processing.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Forms.Recognition">
-      <HintPath>..\packages\Leadtools20\Leadtools.Forms.Recognition.dll</HintPath>
+    <Reference Include="Leadtools.Forms.Recognition, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Forms.Recognition.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Forms.Recognition.Barcode">
-      <HintPath>..\packages\Leadtools20\Leadtools.Forms.Recognition.Barcode.dll</HintPath>
+    <Reference Include="Leadtools.Forms.Recognition.Barcode, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Forms.Recognition.Barcode.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Forms.Recognition.Ocr">
-      <HintPath>..\packages\Leadtools20\Leadtools.Forms.Recognition.Ocr.dll</HintPath>
+    <Reference Include="Leadtools.Forms.Recognition.Ocr, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Forms.Recognition.Ocr.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.ImageProcessing.Color">
-      <HintPath>..\packages\Leadtools20\Leadtools.ImageProcessing.Color.dll</HintPath>
+    <Reference Include="Leadtools.ImageProcessing.Color, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.ImageProcessing.Color.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.ImageProcessing.Core">
-      <HintPath>..\packages\Leadtools20\Leadtools.ImageProcessing.Core.dll</HintPath>
+    <Reference Include="Leadtools.ImageProcessing.Core, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.ImageProcessing.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.ImageProcessing.Effects">
-      <HintPath>..\packages\Leadtools20\Leadtools.ImageProcessing.Effects.dll</HintPath>
+    <Reference Include="Leadtools.ImageProcessing.Effects, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.ImageProcessing.Effects.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.ImageProcessing.Utilities">
-      <HintPath>..\packages\Leadtools20\Leadtools.ImageProcessing.Utilities.dll</HintPath>
+    <Reference Include="Leadtools.ImageProcessing.Utilities, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.ImageProcessing.Utilities.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Ocr">
-      <HintPath>..\packages\Leadtools20\Leadtools.Ocr.dll</HintPath>
+    <Reference Include="Leadtools.Ocr, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Ocr.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Ocr.LEADEngine">
-      <HintPath>..\packages\Leadtools20\Leadtools.Ocr.LEADEngine.dll</HintPath>
+    <Reference Include="Leadtools.Ocr.LEADEngine, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Ocr.LEADEngine.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Ocr.OmniPageEngine">
-      <HintPath>..\packages\Leadtools20\Leadtools.Ocr.OmniPageEngine.dll</HintPath>
+    <Reference Include="Leadtools.Ocr.OmniPageEngine, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Ocr.OmniPageEngine.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Svg">
-      <HintPath>..\packages\Leadtools20\Leadtools.Svg.dll</HintPath>
+    <Reference Include="Leadtools.Svg, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Svg.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Twain">
-      <HintPath>..\packages\Leadtools20\Leadtools.Twain.dll</HintPath>
+    <Reference Include="Leadtools.Twain, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Twain.dll</HintPath>
     </Reference>
-    <Reference Include="Leadtools.Vector">
-      <HintPath>..\packages\Leadtools20\Leadtools.Vector.dll</HintPath>
+    <Reference Include="Leadtools.Vector, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LeadtoolsDependency\Leadtools.Vector.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
@@ -216,6 +241,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LeadtoolsDependency\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

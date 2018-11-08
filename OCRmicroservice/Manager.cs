@@ -20,12 +20,15 @@ namespace OCRmicroservice
         private ConsumerConfig Consumerconf;
         private ProducerConfig Producerconf;
         private Action<DeliveryReportResult<Null, string>> handler;
+        private LeadToolsOCRManager OCR;
+
         static private ILog log;
         public Manager()
         {
             log4net.Config.XmlConfigurator.Configure();
             log = LogManager.GetLogger(typeof(Program));
             log.Info("Start OCR");
+            OCR = new LeadToolsOCRManager(log);
             //configuration kfka consumer
 
             Producer();
@@ -39,7 +42,7 @@ namespace OCRmicroservice
         /// </summary>
         public void Consuming()
         {
-            log.Info("Start Consuming");
+            log.Info("Start waiting new messages");
             Consumerconf = new Confluent.Kafka.ConsumerConfig
             {
                 GroupId = Constants.GroupID,
@@ -51,7 +54,7 @@ namespace OCRmicroservice
                 // eariest message in the topic 'my-topic' the first time you run the program.
                 AutoOffsetReset = AutoOffsetResetType.Earliest
             };
-            using (var c = new Consumer<Ignore, string>(Consumerconf))
+            using (var c = new Consumer<Ignore, byte[]>(Consumerconf))
             {
                 //topic
                 c.Subscribe(Constants.ConsumerTopic);
@@ -89,13 +92,25 @@ namespace OCRmicroservice
         /// Converting Kafka mex to Protobuf Mex
         /// </summary>
         /// <param name="ProtobufMex"></param>
-        public void AnalyzeProtobufMex(String ProtobufMex)
+        public void AnalyzeProtobufMex(byte[] ProtobufMex)
         {
             try
             {
+              //  byte[] array = pro;
                 log.Info("New Transaction is started to be consumed");
-                Com.Paycasso.Divacs.Protocol.Envelope NewTransaction = Com.Paycasso.Divacs.Protocol.Envelope.Parser.ParseJson(ProtobufMex); // new transaction
-                StartOCR(NewTransaction);
+                Com.Paycasso.Divacs.Protocol.Envelope NewTransaction = Com.Paycasso.Divacs.Protocol.Envelope.Parser.ParseFrom(ProtobufMex);
+                Com.Paycasso.Divacs.Protocol.Message EnvelopeMessage = Com.Paycasso.Divacs.Protocol.Message.Parser.ParseFrom(NewTransaction.Payload.Value);
+
+                if (Constants.TestingMode) // this save the original image just if OCR is set to testing mode
+                {
+                    SaveImages(ref EnvelopeMessage);
+                }
+
+                //to do create response from Envelope
+                Response MachineLearning = new Response();
+
+                // new transaction
+                StartOCR(MachineLearning);
             }
             catch(Exception ex)
             {
@@ -139,28 +154,19 @@ namespace OCRmicroservice
         /// start ocr process
         /// </summary>
         /// <param name="NewTransaction"></param>
-        public void StartOCR(Com.Paycasso.Divacs.Protocol.Envelope NewTransaction)
+        public void StartOCR(Response machineLearning)
         {
-            Com.Paycasso.Divacs.Protocol.Message EnvelopeMessage = Com.Paycasso.Divacs.Protocol.Message.Parser.ParseFrom(NewTransaction.Payload.Value);
-
+            OCRResponse _OCRResponse = new OCRResponse();
             try
             {
-                System.Diagnostics.Debug.WriteLine(EnvelopeMessage.TransactionId);
-                System.Diagnostics.Debug.WriteLine(EnvelopeMessage.ClassifyOcrResult.Description);
-                System.Diagnostics.Debug.WriteLine(EnvelopeMessage.ClassifyOcrResult.Country);
-
-                // Begin Testing Mode, save the images
-                if (Constants.TestingMode) // this save the original image just if OCR is set to testing mode
-                {
-                     SaveImages(ref EnvelopeMessage);
-                }
+                //methods that call leadtool class and read every fields
+                _OCRResponse = OCR.PerformTargetedOcr(machineLearning);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                log.Error("errors, protobuf message has invalid vlaues:", ex);
+                log.Error("errors", ex);
             }
-          
-
+           // return _OCRResponse;
         }
 
 
@@ -196,5 +202,6 @@ namespace OCRmicroservice
                 log.Error(ex);
             }
         }
+
     }
 }

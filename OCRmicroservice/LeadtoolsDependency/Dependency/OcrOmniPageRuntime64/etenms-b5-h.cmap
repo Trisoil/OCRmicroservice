@@ -1,0 +1,44 @@
+%!PS-Adobe-3.0 Resource-CMap
+%%DocumentNeededResources: procset CIDInit
+%%DocumentNeededResources: CMap ETen-B5-H
+%%IncludeResource: procset CIDInit
+%%IncludeResource: CMap ETen-B5-H
+%%BeginResource: CMap ETenms-B5-H
+%%Title: (ETenms-B5-H Adobe CNS1 0)
+%%Version: 1
+
+/CIDInit /ProcSet findresource begin
+
+12 dict begin
+
+begincmap
+
+/ETen-B5-H usecmap
+
+/CIDSystemInfo 3 dict dup begin
+  /Registry (Adobe) def
+  /Ordering (CNS1) def
+  /Supplement 0 def
+end def
+
+/CMapName /ETenms-B5-H def
+
+/CMapVersion 1 def
+/CMapType 0 def
+
+/XUID [1000000 1] def
+
+/WMode 0 def
+
+1 begincidrange
+  <20> <7e> 1
+endcidrange
+
+endcmap
+
+CMapName currentdict /CMap defineresource pop
+
+end
+end
+%%EndResource
+%%EOF
