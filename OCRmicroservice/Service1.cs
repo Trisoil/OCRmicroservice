@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 using log4net;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace OCRmicroservice
 {
@@ -38,12 +30,18 @@ namespace OCRmicroservice
             oThread.Start();
         }
 
+        /// <summary>
+        /// Stop service
+        /// </summary>
         protected override void OnStop()
         {
             log.Info("Stop APP OCR microservice");
             oThread.Abort();
         }
 
+        /// <summary>
+        /// Create the manager which is called by the main Thread
+        /// </summary>
         private void Execution()
         {
             manager = new Manager(log);

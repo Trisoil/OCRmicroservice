@@ -23,17 +23,14 @@ namespace OCRmicroservice
             ServiceBase.Run(ServicesToRun);
         }
 
-        //public  static void Main()
-        //   {
-        //       ILog log;
-        //       log4net.Config.XmlConfigurator.Configure();
-        //       log = LogManager.GetLogger(typeof(Program));
-        //       log.Info("Start APP OCR microservice");
-        //       Manager manager = new Manager(log);
-        //       manager.Start();
-        //       //System.Diagnostics.Debug.WriteLine("test1");
-        //       //Console.WriteLine("test");
-        //       //Console.Read();
-        //   }
+        public static void TestMain()
+        {
+            ILog log;
+            log4net.Config.XmlConfigurator.Configure();
+            log = LogManager.GetLogger(typeof(Program));
+            log.Info("Start APP OCR microservice");
+            Manager manager = new Manager(log);
+            manager.Start();
+        }
     }
 }

@@ -4,7 +4,6 @@ using System.IO;
 using System.Drawing;
 using Leadtools;
 using Leadtools.Codecs;
-
 using Leadtools.Drawing;
 using System.Collections.Generic;
 using log4net;
@@ -63,8 +62,6 @@ namespace OCRmicroservice
                     {
                         RasterSupport.SetLicense(licenseFileRelativePath, developerKey);
                         _ocrEngineOmnipage = OcrEngineManager.CreateEngine(OcrEngineType.OmniPage, true);
-                        
-                      
                         string runtimeFolder =(@pathDirectoryApp+"LeadtoolsDependency\\Dependency\\OcrOmniPageRuntime64");
                         DirectoryInfo info = new DirectoryInfo(runtimeFolder);
                         _ocrEngineOmnipage.Startup(null, null, null, info.FullName);

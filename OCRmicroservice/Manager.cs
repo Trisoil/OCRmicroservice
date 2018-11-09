@@ -2,14 +2,8 @@
 using Confluent.Kafka;
 using log4net;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf;
-using Google.Protobuf.Collections;
-
-using System.Threading;
 using System.IO;
 using System.Drawing;
 
@@ -49,14 +43,6 @@ namespace OCRmicroservice
             Consuming();
         }
 
-        /// <summary>
-        /// Stop OCR and Consumer
-        /// </summary>
-        public void Stop()
-        {        
-            Dispose();
-        }
-
         #endregion
 
         #region"Kafka Methods"
@@ -81,7 +67,6 @@ namespace OCRmicroservice
             {
                 //topic
                 c.Subscribe(Constants.ConsumerTopic);
-
                 bool consuming = true;
 
                 // The client will automatically recover from non-fatal errors. You typically
@@ -102,7 +87,6 @@ namespace OCRmicroservice
                         log.Error($"Error occured receiving kafka mex: {e.Error.Reason}");
                     }
                 }
-
                 // Ensure the consumer leaves the group cleanly and final offsets are committed.
                 c.Close();
             }
@@ -114,25 +98,32 @@ namespace OCRmicroservice
         /// <param name="envelope"></param>
         public static async Task SendObject(Envelope envelope)
         {
-            log.Info("Start Sending answer");
-            var config = new ProducerConfig { BootstrapServers = Constants.KafkaBootstrapServers };
-            using (var p = new Producer<Null, byte[]>(config))
+            try
             {
-                for (int i = 0; i < 2; ++i)
+                log.Info("Start Sending answer");
+                var config = new ProducerConfig { BootstrapServers = Constants.KafkaBootstrapServers };
+                String TransactionID = ""; //todo copy from incoming message
+                using (var p = new Producer<Null, byte[]>(config))
                 {
-                    try
+                    for (int i = 0; i < 2; ++i)
                     {
-                        var dr = await p.ProduceAsync(Constants.ProducerTopic, new Message<Null, byte[]> { Value = envelope.ToByteArray() });
-                        log.Info("transaction succesfully delivered");
-                    }
-                    catch (KafkaException e)
-                    {
-                        log.Error($"Delivery failed to Kafka: {e.Error.Reason}");
+                        try
+                        {
+                            var dr = await p.ProduceAsync(Constants.ProducerTopic, new Message<Null, byte[]> { Value = envelope.ToByteArray() });
+                            log.Info("transactionID" + TransactionID + " succesfully delivered");
+                        }
+                        catch (KafkaException e)
+                        {
+                            log.Error($"Delivery failed to Kafka: {e.Error.Reason}");
+                        }
                     }
                 }
             }
+            catch(Exception ex)
+            {
+                log.Error("Errors sending the message to kafka. ", ex);
+            }         
         }
-
 
         #endregion
 
@@ -265,7 +256,7 @@ namespace OCRmicroservice
         }
 
         /// <summary>
-        /// Close OCR
+        /// Shut down Manager OCR
         /// </summary>
         public void Dispose()
         {
