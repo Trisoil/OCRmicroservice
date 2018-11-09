@@ -11,6 +11,10 @@
     <AssemblyName>OCRmicroservice</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -22,13 +26,9 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -196,14 +196,17 @@
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.0\lib\netstandard1.1\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -215,6 +218,12 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="LeadToolsOCRManager.cs" />
+    <Compile Include="ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectInstaller.Designer.cs">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </Compile>
     <Compile Include="Protobuf\Divacs.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Protobuf\MessageDefinitions.cs" />
@@ -234,6 +243,1716 @@
     <None Include="packages.config" />
     <None Include="Protobuf\divacs.proto" />
     <None Include="Protobuf\MessageDefinitions.proto" />
+    <Content Include="LeadtoolsDependency\Dependency\LEADTOOLS.lic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\LEADTOOLS.lic.key">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.af.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.af.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.az.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.be.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.be.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.bg.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.bg.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.ca.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.ca.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.Cmc7.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.cs.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.cs.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.da.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.da.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.de.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.de.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.el.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.el.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.en.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.en.bin2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.en.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.es.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.es.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.et.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.et.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.eu.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.fi.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.Field.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.fr.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.fr.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.gl.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.hr.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.hr.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.hu.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.hu.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.id.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.id.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.is.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.is.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.it.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.it.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.ja.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.ja.bin2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.ko.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.ko.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.lt.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.lt.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.lv.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.lv.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.Micr.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.mk.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.mk.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.Mrz.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.ms.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.ms.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.mt.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.mt.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.nl.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.nl.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.no.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.no.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.pl.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.pl.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.pt.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.pt.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.ro.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.ro.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.ru.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.ru.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.sk.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.sk.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.sl.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.sl.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.sq.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.sq.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.sr.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.sr.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.sv.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.sv.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.sw.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.sw.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.te.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.th.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.th.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.tr.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.uk.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.uk.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.vi.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.vi.dic">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.zh-Hans.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrLEADRuntime\LEAD.zh-Hant.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\83pv-rksj-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\90ms-rksj-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\90ms-rksj-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\90msp-rksj-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\90msp-rksj-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\90pv-rksj-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\add-rksj-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\add-rksj-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\adobe-cns1-ucs2.codeset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\adobe-gb1-ucs2.codeset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\adobe-japan1-ucs2.codeset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\adobe-korea1-ucs2.codeset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-console-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-datetime-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-debug-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-errorhandling-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-file-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-file-l1-2-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-file-l2-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-handle-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-heap-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-interlocked-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-libraryloader-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-localization-l1-2-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-memory-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-namedpipe-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-processenvironment-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-processthreads-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-processthreads-l1-1-1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-profile-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-rtlsupport-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-string-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-synch-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-synch-l1-2-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-sysinfo-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-timezone-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-core-util-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-conio-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-convert-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-environment-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-filesystem-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-heap-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-locale-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-math-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-multibyte-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-private-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-process-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-runtime-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-stdio-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-string-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-time-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\api-ms-win-crt-utility-l1-1-0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\AppDomainLoader.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\AppHelper.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\AppProductConfig.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\AppUtils.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\asciieng.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Asian.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\atm2lll.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\b5pc-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\b5pc-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\BALTIC.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\big5.cjkset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\BIG5_GlyphMap_MingLiu.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\bigramh.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\bigramz.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Bnt.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Bold300.knb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\cbigram.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\CharSetTable.chr">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\chs.mb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\cht.mb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\cmapfix.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\cns-euc-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\cns-euc-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\concrt140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ConvSettings.sts">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\CRX.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\cylm.elm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\CYRILLIC.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\czech.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\danish.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\datasim.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Defaults.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\DocXConv.dlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\DocXWrapper.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Dot.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\dutch.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\dut_legal.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\dut_medical.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\engdic.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\engidx.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\english.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\eng_financial.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\eng_legal.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\eng_medical.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\errstore.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\eten-b5-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\eten-b5-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\etenms-b5-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\etenms-b5-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\EUC-CN.cjkset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\euc-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\EUC-JP.cjkset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\EUC-TW.cjkset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\euc-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ExcelCnv.dlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ExcelXCnv.dlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ExcelXWrapper.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ext-rksj-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ext-rksj-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\finnish.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Firewrx.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\FireWrx2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\FireWrx3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\FireWrx4.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\FmxLFR.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\FmxOcrA.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\FmxVirt.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Formatter.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\french.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\fre_legal.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\fre_med.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\gb-euc-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\gb-euc-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\GB18030.cjkset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\GB2312_GlyphMap_song.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\gbk-euc-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\gbk-euc-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\gbk.cjkset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\gbk2k-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\gbk2k-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\gbkp-euc-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\gbkp-euc-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\gbpc-euc-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\gbpc-euc-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\gbt-euc-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\gbt-euc-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\german.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ger_legal.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ger_medical.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\greek.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\GREEK.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\hand_s.rec">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\hangullb.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\HKscs-2004.cjkset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\hkscs-b5-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\hkscs-b5-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\HTMLCnv.dlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\hungar.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ICDLLW32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ICHUNW32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Icr.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Icr2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\IF_PNG.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\IPP_OmniPage.dlm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\italian.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\japan.mb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\jpcode.uni">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\jpprint.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\jpprint2.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\jpserht.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\jptree.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\kadmos.uk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\kadmos_rec.cfg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\kdu_vnewR.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\KernelAPI.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\KEZIRSTR.tbc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\KEZIRSTR.tbs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\korean.mb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\KOREAN_GlyphMap_GungsuhChe.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\krcode.uni">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\krdist.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\krprint.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\krserht.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\krtree.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ksc-euc-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ksc-euc-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\kscms-uhc-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\kscms-uhc-hw-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\kscms-uhc-hw-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\kscms-uhc-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\kscpc-euc-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\kszp.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\LATIN1.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\LATIN2.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\LecsoMgr.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\LEditor.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\LFRModIfc.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\LMQuery.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\lookup.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\lpdata.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\lpdata_russian.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Mat.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ME_ConverterMgr.dlm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ME_D2D.dlm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ME_DocMgr.dlm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ME_WFAssist.dlm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ME_WFMgr.dlm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ME_WFView.dlm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\mfc140u.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\MiddleEarth.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\mojilist.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Mor.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Mor2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Mor3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Mor4.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Mor5.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Mor6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\MorIF.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\msvcp140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\norm.rec">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\norsk.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ocrhc.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ocrvc.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\P4dll.vm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\p4dll1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\p4dll2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\p4dll3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\p4dll4.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\pccext.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\pccext2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\pccext3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\pccext4.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\pccext5.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\pccext6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\PDFCnv.dlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\pdfdoc.cjkset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\pdflin.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\polish.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\port.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\PPTXConv.dlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\PPTXWrapper.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\PreRendering.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\quantifi.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\RecAPIPlus.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\RecDiag.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\RecoCore.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Recogn.bct">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\recogn.set">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Recogn24.bct">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Rendering.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Rendering2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\rndsdawg.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\rndsinso.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\RtfConv.dlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\russian.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_CAT.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_CZH.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_DAN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_DUT.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_ENG.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_FIN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_FRE.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_GER.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_GRE.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_HUN.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_ITA.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_NOR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_POL.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_POR.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_RUS.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_SLN.DMD">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_SPA.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\R_SWE.DAT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\sami.set">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\sccode.uni">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\scprint.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\scprint2.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\scserht.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\sctree.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\SFOCR.tud">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\shift_jis.cjkset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\sizes.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\SJIS_GlyphMap_MSMinCho.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\SkinnedClasses.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\SkinnedWindows.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\spanish.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\SPDFLib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ssdoc-schema2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ssdoc-schema3.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\swedish.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tccode.uni">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tcprint.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tcprint2.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tcserht.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tctree.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\THOCRAPI.DLL">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tudas.fa">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\turkish.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\TURKISH.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\TWBIG532.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twcutchr.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twcutckr.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twcutle.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twcutlin.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twcutlkr.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\TWForm.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\TWGB32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twksc32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\TWLAY32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\TWLAYKR.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tworient.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twpost32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twpostk.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twrecc.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twrece.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twrecj.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twreck.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twrecs.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\TWReverse.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\TWSJIS32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\twstruct.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tw_bu.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tw_gu.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tw_ku.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tw_su.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tw_ub.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tw_ug.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tw_uk.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\tw_us.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\TxtConv.dlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\ucrtbase.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\uhc.cjkset">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unicns-ucs2-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unicns-ucs2-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unicns-utf16-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unicns-utf16-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unigb-ucs2-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unigb-ucs2-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unigb-utf16-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unigb-utf16-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unijis-ucs2-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unijis-ucs2-hw-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unijis-ucs2-hw-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unijis-ucs2-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unijis-utf16-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unijis-utf16-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\uniks-ucs2-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\uniks-ucs2-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\uniks-utf16-h.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\uniks-utf16-v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\unoun.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\uzu_n.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\v.cmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\vcruntime140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\vtdata.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\WM_OPActions.dlm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\WM_OPSteps.dlm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\WM_OPUIActions.dlm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\WordMLConv.dlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\WPCnv.dlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRTB.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRTC.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRTD.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRTE.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRTP.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRTS.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRTZ.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRZB.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRZC.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRZD.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xibrzd.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRZE.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRZP.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRZS.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIBRZZ.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xiczhd.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDANB.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDANC.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDAND.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xidand.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDANE.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDANP.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDANS.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDANZ.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDUTB.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDUTC.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDUTD.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xidutd.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDUTE.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDUTP.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDUTS.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIDUTZ.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Xiengb.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Xiengc.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Xiengd.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xiengd.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Xienge.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Xiengf.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xiengl.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Xiengp.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Xiengs.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\Xiengz.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFINB.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFINC.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFIND.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xifind.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFINE.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFINP.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFINS.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFINZ.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFRNB.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFRNC.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFRND.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xifrnd.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFRNE.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFRNP.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFRNS.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIFRNZ.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xigred.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIGRMB.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIGRMC.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIGRMD.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xigrmd.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIGRME.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIGRMP.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIGRMS.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIGRMZ.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xihund.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xiintd.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIITLB.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIITLC.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIITLD.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xiitld.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIITLE.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIITLP.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIITLS.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIITLZ.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XINRWB.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XINRWC.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XINRWD.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xinrwd.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XINRWE.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XINRWP.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XINRWS.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XINRWZ.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xipold.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIPRTB.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIPRTC.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIPRTD.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xiprtd.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIPRTE.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIPRTP.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIPRTS.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XIPRTZ.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISPNB.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISPNC.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISPND.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xispnd.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISPNE.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISPNP.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISPNS.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISPNZ.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISWDB.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISWDC.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISWDD.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xiswdd.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISWDE.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISWDP.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISWDS.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XISWDZ.BIN">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xiturd.dmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XMLConv.dlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xocr.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xocr2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xocr3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xocr32b.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xocr4.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xocr5.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\xocr6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XPSConv.dlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XPSFactoryMananagedClasses.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\XPSFactoryWrapper.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\zbigramk.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -243,7 +1962,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="LeadtoolsDependency\" />
+    <EmbeddedResource Include="ProjectInstaller.resx">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

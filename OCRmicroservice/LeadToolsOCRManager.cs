@@ -30,6 +30,7 @@ namespace OCRmicroservice
         private readonly ILog _log;
         private Dictionary<string, string> MapLanguages;
         private string licenseFileRelativePath, keyFileRelativePath, dir, developerKey;
+        private string pathDirectoryApp;
         #endregion
 
         #region "Constructors"
@@ -48,6 +49,10 @@ namespace OCRmicroservice
             StartUpOcrEngineOminiPage("en");
         }
 
+        /// <summary>
+        /// This start the OCR engine of Ominipage
+        /// </summary>
+        /// <param name="language"></param>
         public void StartUpOcrEngineOminiPage(String language)
         {
             try
@@ -58,7 +63,9 @@ namespace OCRmicroservice
                     {
                         RasterSupport.SetLicense(licenseFileRelativePath, developerKey);
                         _ocrEngineOmnipage = OcrEngineManager.CreateEngine(OcrEngineType.OmniPage, true);
-                        string runtimeFolder = System.IO.Path.Combine(@"Dependency\OcrOmniPageRuntime64");
+                        
+                      
+                        string runtimeFolder =(@pathDirectoryApp+"LeadtoolsDependency\\Dependency\\OcrOmniPageRuntime64");
                         DirectoryInfo info = new DirectoryInfo(runtimeFolder);
                         _ocrEngineOmnipage.Startup(null, null, null, info.FullName);
                         _ocrEngineOmnipage.SpellCheckManager.SpellCheckEngine = OcrSpellCheckEngine.None;
@@ -94,6 +101,10 @@ namespace OCRmicroservice
             StartUpOcrEngineLead("en");
         }
 
+        /// <summary>
+        /// This start the Lead OCR engine
+        /// </summary>
+        /// <param name="language"></param>
         public void StartUpOcrEngineLead(String language)
         {
             try
@@ -104,7 +115,7 @@ namespace OCRmicroservice
                     {
                         RasterSupport.SetLicense(licenseFileRelativePath, developerKey);
                         _ocrEngineLead = OcrEngineManager.CreateEngine(OcrEngineType.LEAD, true);
-                        string runtimeFolder = System.IO.Path.Combine(@"Dependency/OcrLEADRuntime");
+                        string runtimeFolder = (@pathDirectoryApp + "LeadtoolsDependency\\Dependency\\OcrLEADRuntime");
                         DirectoryInfo info = new DirectoryInfo(runtimeFolder);
                         _ocrEngineLead.Startup(null, null, null, info.FullName);
                         _ocrEngineLead.RasterCodecsInstance.Options.Load.AllPages = true;
@@ -510,20 +521,20 @@ namespace OCRmicroservice
                             g.FillRectangle(shadowBrushRectangle, cropRect);
                         }
                     }
-                    DirectoryInfo TestImages = Directory.CreateDirectory(Environment.CurrentDirectory + "\\TestImages");
+                    DirectoryInfo TestImages = Directory.CreateDirectory(pathDirectoryApp + "\\TestImages");
 
                     //one transactin can have 3 different images ,then them need to be saved with different name
-                    if (File.Exists("TestImages\\" + TransactionID.ToString() + "_" + DocumentName + ".png"))
+                    if (File.Exists(pathDirectoryApp+"TestImages\\" + TransactionID.ToString() + "_" + DocumentName + ".png"))
                     {
-                        if (File.Exists("TestImages\\" + TransactionID.ToString() + "_2" + DocumentName + ".png"))
+                        if (File.Exists(pathDirectoryApp + "TestImages\\" + TransactionID.ToString() + "_2" + DocumentName + ".png"))
                         {
-                            imageHolder.Save("TestImages\\" + TransactionID.ToString() + "_3" + DocumentName + ".png");
+                            imageHolder.Save(pathDirectoryApp + "TestImages\\" + TransactionID.ToString() + "_3" + DocumentName + ".png");
                         }
                         else
-                            imageHolder.Save("TestImages\\" + TransactionID.ToString() + "_2" + DocumentName + ".png");
+                            imageHolder.Save(pathDirectoryApp + "TestImages\\" + TransactionID.ToString() + "_2" + DocumentName + ".png");
                     }
                     else
-                        imageHolder.Save("TestImages\\" + TransactionID.ToString() + "_" + DocumentName + ".png");
+                        imageHolder.Save(pathDirectoryApp + "TestImages\\" + TransactionID.ToString() + "_" + DocumentName + ".png");
                 }
             }
             catch (Exception ex)
@@ -860,13 +871,15 @@ namespace OCRmicroservice
         {
             try
             {
+                pathDirectoryApp = System.AppDomain.CurrentDomain.BaseDirectory;
                 // set dependencies
-                licenseFileRelativePath = System.IO.Path.Combine(@"Dependency\LEADTOOLS.lic");
-                keyFileRelativePath = System.IO.Path.Combine(@"Dependency\LEADTOOLS.lic.key");
-                dir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                licenseFileRelativePath = (@pathDirectoryApp + "LeadtoolsDependency\\Dependency\\LEADTOOLS.lic");
+                keyFileRelativePath = (@pathDirectoryApp + "LeadtoolsDependency\\Dependency\\LEADTOOLS.lic.key");
+                dir = pathDirectoryApp;// System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
                 developerKey = System.IO.File.ReadAllText(keyFileRelativePath);
                 //set languages
                 InitializeLanguages();
+               
             }
             catch (Exception ex)
             {
@@ -921,7 +934,7 @@ namespace OCRmicroservice
             }
         }
 
-        public List<OcrZone> getZones(Image bitmap)
+        public List<OcrZone> GetZones(Image bitmap)
         {
             if (bitmap.Height > 30)
             {

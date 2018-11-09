@@ -28,14 +28,15 @@ namespace OCRmicroservice
         private Envelope answer;
         private static ILog log;
         Boolean Activation;
+        private string pathDirectoryApp;
         #endregion
 
         #region "Inititializations"
         public Manager(ILog Log)
         {
             log = Log;
-            log.Info("Start OCR");
-            OCR = new LeadToolsOCRManager(log);       
+            pathDirectoryApp = System.AppDomain.CurrentDomain.BaseDirectory;       
+            Start();
         }
 
         /// <summary>
@@ -43,6 +44,7 @@ namespace OCRmicroservice
         /// </summary>
         public void Start()
         {
+            OCR = new LeadToolsOCRManager(log);
             Activation = true;
             Consuming();
         }
@@ -50,7 +52,7 @@ namespace OCRmicroservice
         /// <summary>
         /// Stop OCR and Consumer
         /// </summary>
-        public void stop()
+        public void Stop()
         {        
             Dispose();
         }
@@ -63,7 +65,7 @@ namespace OCRmicroservice
         /// </summary>
         public void Consuming()
         {
-            log.Info("Start waiting new messages");
+            log.Info("Waiting new Kafka messages");
             ConsumerConfig Consumerconf = new Confluent.Kafka.ConsumerConfig
             {
                 GroupId = Constants.GroupID,
@@ -177,7 +179,7 @@ namespace OCRmicroservice
             }
             catch (Exception ex)
             {
-                log.Error("errors");
+                log.Error("errors",ex);
             }
         }
 
@@ -240,19 +242,19 @@ namespace OCRmicroservice
                 using (var mStream = new MemoryStream(imageInByte))
                 {
                     Image OriginalImage = Image.FromStream((Stream)mStream);
-                    DirectoryInfo TestImages = Directory.CreateDirectory(Environment.CurrentDirectory + "\\TestImages");
+                    DirectoryInfo TestImages = Directory.CreateDirectory(pathDirectoryApp + "TestImages");
 
-                    if (File.Exists("TestImages\\" + EnvelopeMessage.TransactionId.ToString() + ".png"))
+                    if (File.Exists(pathDirectoryApp+"TestImages\\" + EnvelopeMessage.TransactionId.ToString() + ".png"))
                     {
-                        if (File.Exists("TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_2.png"))
+                        if (File.Exists(pathDirectoryApp + "TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_2.png"))
                         {
-                            OriginalImage.Save("TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_3.png");
+                            OriginalImage.Save(pathDirectoryApp + "TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_3.png");
                         }
                         else
-                            OriginalImage.Save("TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_2.png");
+                            OriginalImage.Save(pathDirectoryApp + "TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_2.png");
                     }
                     else
-                        OriginalImage.Save("TestImages\\" + EnvelopeMessage.TransactionId.ToString() + ".png");
+                        OriginalImage.Save(pathDirectoryApp + "TestImages\\" + EnvelopeMessage.TransactionId.ToString() + ".png");
                 }
                 log.Info("saved images succesfully");
             }

@@ -13,25 +13,27 @@ namespace OCRmicroservice
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        //static void Main()
-        //{
-        //    ServiceBase[] ServicesToRun;
-        //    ServicesToRun = new ServiceBase[]
-        //    {
-        //        new Service1()
-        //    };
-        //    ServiceBase.Run(ServicesToRun);
-        //}
-
-     public  static void Main()
+        static void Main()
         {
-            ILog log;
-            log4net.Config.XmlConfigurator.Configure();
-            log = LogManager.GetLogger(typeof(Program));
-            Manager manager = new Manager(log);
-            //System.Diagnostics.Debug.WriteLine("test1");
-            //Console.WriteLine("test");
-            //Console.Read();
+            ServiceBase[] ServicesToRun;
+            ServicesToRun = new ServiceBase[]
+            {
+                new Service1()
+            };
+            ServiceBase.Run(ServicesToRun);
         }
+
+        //public  static void Main()
+        //   {
+        //       ILog log;
+        //       log4net.Config.XmlConfigurator.Configure();
+        //       log = LogManager.GetLogger(typeof(Program));
+        //       log.Info("Start APP OCR microservice");
+        //       Manager manager = new Manager(log);
+        //       manager.Start();
+        //       //System.Diagnostics.Debug.WriteLine("test1");
+        //       //Console.WriteLine("test");
+        //       //Console.Read();
+        //   }
     }
 }
