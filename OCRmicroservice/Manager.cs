@@ -15,35 +15,56 @@ using System.Drawing;
 
 namespace OCRmicroservice
 {
-    class Manager
+    /// <summary>
+    /// This is the Main class of the project. Here There are the Kafka consumer that get the  messages (protobuf) and
+    /// OCR the images within Leadtools, then it send the response with the new information to Kafka
+    /// </summary>
+    class Manager : IDisposable
     {
-        private ConsumerConfig Consumerconf;
-        private ProducerConfig Producerconf;
-        private Action<DeliveryReportResult<Null, string>> handler;
+        #region "Properties"      
         private LeadToolsOCRManager OCR;
+        private Response machineLearning;
+        private OCRResponse ocrResponse;
+        private Envelope answer;
+        private static ILog log;
+        Boolean Activation;
+        #endregion
 
-        static private ILog log;
-        public Manager()
+        #region "Inititializations"
+        public Manager(ILog Log)
         {
-            log4net.Config.XmlConfigurator.Configure();
-            log = LogManager.GetLogger(typeof(Program));
+            log = Log;
             log.Info("Start OCR");
-            OCR = new LeadToolsOCRManager(log);
-            //configuration kfka consumer
+            OCR = new LeadToolsOCRManager(log);       
+        }
 
-            Producer();
-
-            // warning Consumer will stay in loop for ever
+        /// <summary>
+        /// Start Consuming and OCR
+        /// </summary>
+        public void Start()
+        {
+            Activation = true;
             Consuming();
         }
 
+        /// <summary>
+        /// Stop OCR and Consumer
+        /// </summary>
+        public void stop()
+        {        
+            Dispose();
+        }
+
+        #endregion
+
+        #region"Kafka Methods"
         /// <summary>
         /// Configure kafka consumer
         /// </summary>
         public void Consuming()
         {
             log.Info("Start waiting new messages");
-            Consumerconf = new Confluent.Kafka.ConsumerConfig
+            ConsumerConfig Consumerconf = new Confluent.Kafka.ConsumerConfig
             {
                 GroupId = Constants.GroupID,
                 BootstrapServers = Constants.KafkaBootstrapServers,
@@ -60,21 +81,19 @@ namespace OCRmicroservice
                 c.Subscribe(Constants.ConsumerTopic);
 
                 bool consuming = true;
+
                 // The client will automatically recover from non-fatal errors. You typically
                 // don't need to take any action unless an error is marked as fatal.
                 c.OnError += (_, e) => consuming = !e.IsFatal;
 
-                while (consuming)
+                while (consuming && Activation)
                 {
                     try
                     {
                         var cr = c.Consume();
 
-                        if (cr.Value!= null)
-                        {
-                            AnalyzeProtobufMex(cr.Value);
-                        }
-                        
+                        // do job
+                        DoJob(cr.Value);
                     }
                     catch (ConsumeException e)
                     {
@@ -87,88 +106,126 @@ namespace OCRmicroservice
             }
         }
 
-
-        /// <summary>
-        /// Converting Kafka mex to Protobuf Mex
-        /// </summary>
-        /// <param name="ProtobufMex"></param>
-        public void AnalyzeProtobufMex(byte[] ProtobufMex)
-        {
-            try
-            {
-              //  byte[] array = pro;
-                log.Info("New Transaction is started to be consumed");
-                Com.Paycasso.Divacs.Protocol.Envelope NewTransaction = Com.Paycasso.Divacs.Protocol.Envelope.Parser.ParseFrom(ProtobufMex);
-                Com.Paycasso.Divacs.Protocol.Message EnvelopeMessage = Com.Paycasso.Divacs.Protocol.Message.Parser.ParseFrom(NewTransaction.Payload.Value);
-
-                if (Constants.TestingMode) // this save the original image just if OCR is set to testing mode
-                {
-                    SaveImages(ref EnvelopeMessage);
-                }
-
-                //to do create response from Envelope
-                Response MachineLearning = new Response();
-
-                // new transaction
-                StartOCR(MachineLearning);
-            }
-            catch(Exception ex)
-            {
-                log.Error("Error converting Protobuf mex", ex);
-            }
-        }
-
-        /// <summary>
-        /// Configure Kafka Producer
-        /// </summary>
-        public void Producer()
-        {
-            Producerconf = new ProducerConfig { BootstrapServers = Constants.KafkaBootstrapServers };
-
-            handler = r =>
-                Console.WriteLine(!r.Error.IsError
-                    ? $"Delivered message to {r.TopicPartitionOffset}"
-                    : $"Delivery Error: {r.Error.Reason}");
-          
-        }
-
         /// <summary>
         /// Send a Message to the Kafka broker with type Envelope as jsonstring serialised by Protobuf
         /// </summary>
         /// <param name="envelope"></param>
-        public void SendObject(Envelope envelope)
+        public static async Task SendObject(Envelope envelope)
         {
-            using (var p = new Producer<Null, string>(Producerconf))
+            log.Info("Start Sending answer");
+            var config = new ProducerConfig { BootstrapServers = Constants.KafkaBootstrapServers };
+            using (var p = new Producer<Null, byte[]>(config))
             {
                 for (int i = 0; i < 2; ++i)
                 {
-                    p.BeginProduce(Constants.ProducerTopic, new Message<Null, string> { Value = envelope.ToString() }, handler);
+                    try
+                    {
+                        var dr = await p.ProduceAsync(Constants.ProducerTopic, new Message<Null, byte[]> { Value = envelope.ToByteArray() });
+                        log.Info("transaction succesfully delivered");
+                    }
+                    catch (KafkaException e)
+                    {
+                        log.Error($"Delivery failed to Kafka: {e.Error.Reason}");
+                    }
                 }
-                // wait for up to 10 seconds for any inflight messages to be delivered.
-                p.Flush(TimeSpan.FromSeconds(10));
             }
         }
 
+
+        #endregion
+
+        #region"Protobuf Methods"
+        /// <summary>
+        /// Converting Kafka mex to Protobuf Mex
+        /// </summary>
+        /// <param name="ProtobufMex"></param>
+        public Response AnalyzeProtobufMex(byte[] ProtobufMex)
+        {
+            Response MachineLearning = new Response();
+            try
+            {
+                log.Info("start to converting the kafka message to protobuf message");
+                Com.Paycasso.Divacs.Protocol.Envelope NewTransaction = Com.Paycasso.Divacs.Protocol.Envelope.Parser.ParseFrom(ProtobufMex);
+                Com.Paycasso.Divacs.Protocol.Message EnvelopeMessage = Com.Paycasso.Divacs.Protocol.Message.Parser.ParseFrom(NewTransaction.Payload.Value);
+
+                //to do create response from Envelope
+
+
+                // new transaction
+                //  StartOCR(MachineLearning);
+
+                log.Info("End succesfully conversion protobuf message");
+                if (Constants.TestingMode) // this save the original image just if OCR is set to testing mode
+                {
+                    SaveImages(ref EnvelopeMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error converting Protobuf mex", ex);
+            }
+
+            return MachineLearning;
+        }
+
+        public void ConvertToAnswer()
+        {
+            try
+            {
+                //to do
+                answer = new Envelope();
+            }
+            catch (Exception ex)
+            {
+                log.Error("errors");
+            }
+        }
+
+        #endregion
+
+        #region "Methods"
+        /// <summary>
+        /// the jobs of the software
+        /// </summary>
+        /// <param name="ConsumedInput"></param>
+        public void DoJob(byte[] ConsumedInput)
+        {
+            try
+            {
+                // convert the kafka message within protobuf     
+                machineLearning = AnalyzeProtobufMex(ConsumedInput);
+
+                //Start OCR
+                ocrResponse = StartOCR(machineLearning);
+
+                //SendAnswer in background and continuos new jobs
+                Task SendAnswer = SendObject(answer);
+            }
+
+            catch (Exception ex)
+            {
+                log.Error("errors during the work", ex);
+            }
+        }
 
         /// <summary>
         /// start ocr process
         /// </summary>
         /// <param name="NewTransaction"></param>
-        public void StartOCR(Response machineLearning)
+        public OCRResponse StartOCR(Response machineLearning)
         {
             OCRResponse _OCRResponse = new OCRResponse();
             try
             {
                 //methods that call leadtool class and read every fields
-                _OCRResponse = OCR.PerformTargetedOcr(machineLearning);
+                return _OCRResponse = OCR.PerformTargetedOcr(machineLearning);
             }
             catch (Exception ex)
             {
                 log.Error("errors", ex);
             }
-           // return _OCRResponse;
+            return _OCRResponse;
         }
-
 
         /// <summary>
         /// Save the images to the TestImages folder if the software is in testing mode
@@ -178,6 +235,7 @@ namespace OCRmicroservice
         {
             try
             {
+                log.Info("saving image received in the disk");
                 var imageInByte = Convert.FromBase64String(EnvelopeMessage.ClassifyDocument.Parts);
                 using (var mStream = new MemoryStream(imageInByte))
                 {
@@ -196,12 +254,23 @@ namespace OCRmicroservice
                     else
                         OriginalImage.Save("TestImages\\" + EnvelopeMessage.TransactionId.ToString() + ".png");
                 }
+                log.Info("saved images succesfully");
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                log.Error("error saving the images received,", ex);
             }
         }
 
+        /// <summary>
+        /// Close OCR
+        /// </summary>
+        public void Dispose()
+        {
+            Activation = false;
+            OCR.Dispose();
+        }
+
+        #endregion
     }
 }

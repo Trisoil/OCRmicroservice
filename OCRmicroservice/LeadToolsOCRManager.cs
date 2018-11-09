@@ -236,6 +236,8 @@ namespace OCRmicroservice
             {
                 try
                 {
+                    _log.Info("Start OCR Reader");
+
                     if (_ocrEngineOmnipage == null || _ocrEngineOmnipage.IsStarted == false)
                     {
                         StartUpOcrEngineOminiPage();
@@ -449,7 +451,8 @@ namespace OCRmicroservice
                             }
                         }
                     }
-                }
+                    _log.Info("End Reading");
+                }              
                 catch (Exception ex)
                 {
 

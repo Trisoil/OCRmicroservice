@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
@@ -24,7 +25,10 @@ namespace OCRmicroservice
 
      public  static void Main()
         {
-            Manager manager = new Manager();
+            ILog log;
+            log4net.Config.XmlConfigurator.Configure();
+            log = LogManager.GetLogger(typeof(Program));
+            Manager manager = new Manager(log);
             //System.Diagnostics.Debug.WriteLine("test1");
             //Console.WriteLine("test");
             //Console.Read();
