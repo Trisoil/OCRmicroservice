@@ -17,7 +17,16 @@ namespace OCRmicroservice
         {
             get
             {
-                return ConfigurationManager.AppSettings["GroupID"].ToString();
+                try
+                {
+                    return ConfigurationManager.AppSettings["GroupID"].ToString();
+                }
+                catch
+                {
+                    //this is just for unit test project
+                    return "test-consumer-group";
+                }
+               
             }
         }
 
@@ -25,7 +34,17 @@ namespace OCRmicroservice
         {
             get
             {
-                return ConfigurationManager.AppSettings["ConsumerTopic"].ToString();
+                try
+                {
+                    return ConfigurationManager.AppSettings["ConsumerTopic"].ToString();
+                }
+                
+                catch 
+                {
+                    //this is just for unit test project
+                    return "CE_Results";
+                }
+              
             }
         }
 
@@ -33,7 +52,16 @@ namespace OCRmicroservice
         {
             get
             {
-                return ConfigurationManager.AppSettings["ProducerTopic"].ToString();
+                try
+                {
+                    return ConfigurationManager.AppSettings["ProducerTopic"].ToString();
+                }
+                catch
+                {
+                    //this is just for unit test project
+                    return "OCR_Results";
+                }
+              
             }
         }
 
@@ -41,14 +69,31 @@ namespace OCRmicroservice
         {
             get
             {
-                return Convert.ToBoolean(ConfigurationManager.AppSettings["TestingMode"].ToLower());
+                try
+                {
+                    return Convert.ToBoolean(ConfigurationManager.AppSettings["TestingMode"].ToLower());
+                }
+                catch
+                {
+                    //this is just for unit test project
+                    return false;
+                }
+                
             }
         }
         public static string KafkaBootstrapServers
         {
             get
             {
-                return ConfigurationManager.AppSettings["KafkaBootstrapServers"].ToString();
+                try
+                {
+                    return ConfigurationManager.AppSettings["KafkaBootstrapServers"].ToString();
+                }
+                catch
+                {
+                    //this is just for unit test project
+                    return "localhost:9092";
+                }            
             }
         }
     }

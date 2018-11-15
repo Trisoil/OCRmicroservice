@@ -13,7 +13,7 @@ namespace OCRmicroservice
     /// This is the Main class of the project. Here There are the Kafka consumer that get the  messages (protobuf) and
     /// OCR the images within Leadtools, then it send the response with the new information to Kafka
     /// </summary>
-    class Manager : IDisposable
+   public class Manager : IDisposable
     {
         #region "Properties"      
         private LeadToolsOCRManager OCR;
@@ -29,8 +29,9 @@ namespace OCRmicroservice
         public Manager(ILog Log)
         {
             log = Log;
-            pathDirectoryApp = System.AppDomain.CurrentDomain.BaseDirectory;       
-            Start();
+            pathDirectoryApp = System.AppDomain.CurrentDomain.BaseDirectory;
+            OCR = new LeadToolsOCRManager(log);
+            Activation = true;
         }
 
         /// <summary>
@@ -38,8 +39,6 @@ namespace OCRmicroservice
         /// </summary>
         public void Start()
         {
-            OCR = new LeadToolsOCRManager(log);
-            Activation = true;
             Consuming();
         }
 
@@ -96,7 +95,7 @@ namespace OCRmicroservice
         /// Send a Message to the Kafka broker with type Envelope as jsonstring serialised by Protobuf
         /// </summary>
         /// <param name="envelope"></param>
-        public static async Task SendObject(Envelope envelope)
+        public async Task SendObject(Envelope envelope)
         {
             try
             {

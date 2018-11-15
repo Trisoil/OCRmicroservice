@@ -869,6 +869,7 @@ namespace OCRmicroservice
             try
             {
                 pathDirectoryApp = System.AppDomain.CurrentDomain.BaseDirectory;
+                pathDirectoryApp += "\\";
                 // set dependencies
                 licenseFileRelativePath = (@pathDirectoryApp + "LeadtoolsDependency\\Dependency\\LEADTOOLS.lic");
                 keyFileRelativePath = (@pathDirectoryApp + "LeadtoolsDependency\\Dependency\\LEADTOOLS.lic.key");

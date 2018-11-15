@@ -45,6 +45,7 @@ namespace OCRmicroservice
         private void Execution()
         {
             manager = new Manager(log);
+            manager.Start();
         }
     }
 }
