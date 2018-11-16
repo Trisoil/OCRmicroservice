@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "document.proto";
+
+message ClassifyDocument {
+    bytes image = 1;
+}
+
+message Classification {
+    oneof document {
+        ICAODocument icao = 1;
+        GovernmentIssuedId government_issued_id = 2;
+        SecondaryDocument secondary = 3;
+        Novelty novelty = 4;
+    };
+    float confidence = 10;
+}
+
+message Novelty {
+}
+

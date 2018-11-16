@@ -79,22 +79,7 @@ namespace OCRmicroservice.Tests
             };
             using (var consumer = new Consumer<Ignore, byte[]>(Consumerconf))
             {
-                consumer.Assign(new List { new TopicPartitionOffset(topics.First(), 0, 0) });
-
-                consumer.OnPartitionsAssigned += (obj, partitions) => {
-                    Console.WriteLine($"Assigned partitions: [{string.Join(", ", partitions)}], member id: {consumer.MemberId}");
-                    var fromBeginning = partitions.Select(p => new TopicPartitionOffset(p.Topic, p.Partition, Offset.Beginning)).ToList();
-                    Console.WriteLine($"Updated assignment: [{string.Join(", ", fromBeginning)}]");
-                    consumer.Assign(fromBeginning);
-                };
-
-                consumer.Subscribe(Constants.ConsumerTopic);
-                List<Partition> partitions = consumer.Assignment();
-                //Partition partition = consumer.Commit(default(CancellationToken));
-                TopicPartitionOffset topic;
-                //topic
-
-                Partition partition = consumer.OnPartitionEOF();
+              
                 bool consuming = true;
 
                 // The client will automatically recover from non-fatal errors. You typically
@@ -116,7 +101,7 @@ namespace OCRmicroservice.Tests
                     }
                 }
                 // Ensure the consumer leaves the group cleanly and final offsets are committed.
-                c.Close();
+                consumer.Close();
             }
         }
     }

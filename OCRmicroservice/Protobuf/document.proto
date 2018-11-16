@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+import "country.proto";
+
+enum DocumentType {
+    UnknownDocumentType  = 0;
+    IdentityCard = 1;
+    Passport = 2;
+    DrivingLicence = 3;
+    Secondary = 4;
+}
+
+message ICAODocument {
+    DocumentType document_type = 1;
+    Country country = 2;
+    string description = 3;
+}
+
+message GovernmentIssuedId {
+    DocumentType document_type = 1;
+    Country country = 2;
+    string description = 3;
+}
+
+message SecondaryDocument {
+    Country country = 1;
+    string description = 2;
+}

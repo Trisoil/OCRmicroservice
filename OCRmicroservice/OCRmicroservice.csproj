@@ -224,9 +224,17 @@
     <Compile Include="ProjectInstaller.Designer.cs">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
+    <Compile Include="Protobuf\Classification.cs" />
+    <Compile Include="Protobuf\Country.cs" />
     <Compile Include="Protobuf\Divacs.cs" />
     <Compile Include="Manager.cs" />
-    <Compile Include="Protobuf\MessageDefinitions.cs" />
+    <Compile Include="Protobuf\Doccheck.cs" />
+    <Compile Include="Protobuf\Document.cs" />
+    <Compile Include="Protobuf\Localisation.cs" />
+    <Compile Include="Protobuf\Ocr.cs" />
+    <Compile Include="Protobuf\Rectification.cs" />
+    <Compile Include="Protobuf\Roi.cs" />
+    <Compile Include="Protobuf\Template.cs" />
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -241,7 +249,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Protobuf\classification.proto" />
+    <None Include="Protobuf\country.proto" />
     <None Include="Protobuf\divacs.proto" />
+    <None Include="Protobuf\doccheck.proto" />
+    <None Include="Protobuf\document.proto" />
+    <None Include="Protobuf\localisation.proto" />
     <None Include="Protobuf\MessageDefinitions.proto" />
     <Content Include="LeadtoolsDependency\Dependency\LEADTOOLS.lic">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1953,6 +1966,10 @@
     <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\zbigramk.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Protobuf\ocr.proto" />
+    <None Include="Protobuf\rectification.proto" />
+    <None Include="Protobuf\roi.proto" />
+    <None Include="Protobuf\template.proto" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

@@ -18,7 +18,8 @@ namespace OCRmicroservice
         #region "Properties"      
         private LeadToolsOCRManager OCR;
         private Response machineLearning;
-        private OCRResponse ocrResponse;
+        private OcrResponse ocrResponse;
+        private Envelope request;
         private Envelope answer;
         private static ILog log;
         Boolean Activation;
@@ -101,19 +102,26 @@ namespace OCRmicroservice
             {
                 log.Info("Start Sending answer");
                 var config = new ProducerConfig { BootstrapServers = Constants.KafkaBootstrapServers };
-                String TransactionID = ""; //todo copy from incoming message
                 using (var p = new Producer<Null, byte[]>(config))
                 {
                     for (int i = 0; i < 2; ++i)
                     {
                         try
                         {
+                         
                             var dr = await p.ProduceAsync(Constants.ProducerTopic, new Message<Null, byte[]> { Value = envelope.ToByteArray() });
-                            log.Info("transactionID" + TransactionID + " succesfully delivered");
+
+                            lock (log)
+                            {
+                                log.Info("transactionID" + envelope.TransactionId+ " succesfully delivered");
+                            }                         
                         }
                         catch (KafkaException e)
                         {
-                            log.Error($"Delivery failed to Kafka: {e.Error.Reason}");
+                            lock (log)
+                            {
+                                log.Error($"Delivery failed to Kafka: {e.Error.Reason}");
+                            }                           
                         }
                     }
                 }
@@ -131,33 +139,22 @@ namespace OCRmicroservice
         /// Converting Kafka mex to Protobuf Mex
         /// </summary>
         /// <param name="ProtobufMex"></param>
-        public Response AnalyzeProtobufMex(byte[] ProtobufMex)
+        public Boolean AnalyzeProtobufMex(ref byte[] ProtobufMex)
         {
-            Response MachineLearning = new Response();
+          //  Response MachineLearning = new Response();
             try
             {
                 log.Info("start to converting the kafka message to protobuf message");
-                Com.Paycasso.Divacs.Protocol.Envelope NewTransaction = Com.Paycasso.Divacs.Protocol.Envelope.Parser.ParseFrom(ProtobufMex);
-                Com.Paycasso.Divacs.Protocol.Message EnvelopeMessage = Com.Paycasso.Divacs.Protocol.Message.Parser.ParseFrom(NewTransaction.Payload.Value);
-
-                //to do create response from Envelope
-
-
-                // new transaction
-                //  StartOCR(MachineLearning);
-
+                request = Envelope.Parser.ParseFrom(ProtobufMex);
                 log.Info("End succesfully conversion protobuf message");
-                if (Constants.TestingMode) // this save the original image just if OCR is set to testing mode
-                {
-                    SaveImages(ref EnvelopeMessage);
-                }
             }
             catch (Exception ex)
             {
                 log.Error("Error converting Protobuf mex", ex);
+                return false;
             }
 
-            return MachineLearning;
+            return true;
         }
 
         public void ConvertToAnswer()
@@ -185,10 +182,10 @@ namespace OCRmicroservice
             try
             {
                 // convert the kafka message within protobuf     
-                machineLearning = AnalyzeProtobufMex(ConsumedInput);
+                AnalyzeProtobufMex(ref ConsumedInput);
 
                 //Start OCR
-                ocrResponse = StartOCR(machineLearning);
+                ocrResponse = StartOCR();
 
                 //SendAnswer in background and continuos new jobs
                 Task SendAnswer = SendObject(answer);
@@ -204,13 +201,13 @@ namespace OCRmicroservice
         /// start ocr process
         /// </summary>
         /// <param name="NewTransaction"></param>
-        public OCRResponse StartOCR(Response machineLearning)
+        public OcrResponse StartOCR()
         {
-            OCRResponse _OCRResponse = new OCRResponse();
+            OcrResponse _OCRResponse = new OcrResponse();
             try
             {
                 //methods that call leadtool class and read every fields
-                return _OCRResponse = OCR.PerformTargetedOcr(machineLearning);
+                return _OCRResponse = OCR.PerformTargetedOcr( ref request);
             }
             catch (Exception ex)
             {
@@ -223,36 +220,36 @@ namespace OCRmicroservice
         /// Save the images to the TestImages folder if the software is in testing mode
         /// </summary>
         /// <param name="EnvelopeMessage"></param>
-        public void SaveImages(ref Com.Paycasso.Divacs.Protocol.Message EnvelopeMessage)
-        {
-            try
-            {
-                log.Info("saving image received in the disk");
-                var imageInByte = Convert.FromBase64String(EnvelopeMessage.ClassifyDocument.Parts);
-                using (var mStream = new MemoryStream(imageInByte))
-                {
-                    Image OriginalImage = Image.FromStream((Stream)mStream);
-                    DirectoryInfo TestImages = Directory.CreateDirectory(pathDirectoryApp + "TestImages");
+        //public void SaveImages(ref Com.Paycasso.Divacs.Protocol.Message EnvelopeMessage)
+        //{
+        //    try
+        //    {
+        //        log.Info("saving image received in the disk");
+        //        var imageInByte = Convert.FromBase64String(EnvelopeMessage.ClassifyDocument.Parts);
+        //        using (var mStream = new MemoryStream(imageInByte))
+        //        {
+        //            Image OriginalImage = Image.FromStream((Stream)mStream);
+        //            DirectoryInfo TestImages = Directory.CreateDirectory(pathDirectoryApp + "TestImages");
 
-                    if (File.Exists(pathDirectoryApp+"TestImages\\" + EnvelopeMessage.TransactionId.ToString() + ".png"))
-                    {
-                        if (File.Exists(pathDirectoryApp + "TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_2.png"))
-                        {
-                            OriginalImage.Save(pathDirectoryApp + "TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_3.png");
-                        }
-                        else
-                            OriginalImage.Save(pathDirectoryApp + "TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_2.png");
-                    }
-                    else
-                        OriginalImage.Save(pathDirectoryApp + "TestImages\\" + EnvelopeMessage.TransactionId.ToString() + ".png");
-                }
-                log.Info("saved images succesfully");
-            }
-            catch (Exception ex)
-            {
-                log.Error("error saving the images received,", ex);
-            }
-        }
+        //            if (File.Exists(pathDirectoryApp+"TestImages\\" + EnvelopeMessage.TransactionId.ToString() + ".png"))
+        //            {
+        //                if (File.Exists(pathDirectoryApp + "TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_2.png"))
+        //                {
+        //                    OriginalImage.Save(pathDirectoryApp + "TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_3.png");
+        //                }
+        //                else
+        //                    OriginalImage.Save(pathDirectoryApp + "TestImages\\" + EnvelopeMessage.TransactionId.ToString() + "_2.png");
+        //            }
+        //            else
+        //                OriginalImage.Save(pathDirectoryApp + "TestImages\\" + EnvelopeMessage.TransactionId.ToString() + ".png");
+        //        }
+        //        log.Info("saved images succesfully");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.Error("error saving the images received,", ex);
+        //    }
+        //}
 
         /// <summary>
         /// Shut down Manager OCR

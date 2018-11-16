@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+enum Country {
+    UnknownCountry = 0;
+    MYS = 1;
+    GBR = 2;
+    UKR = 3;
+    UAE = 4;
+    NZL = 5;
+    ESP = 6;
+    HKG = 7;
+    IRL = 8;
+    AUVIC = 9;
+    LTU = 10;
+}
+
+enum Language {
+    UnknownLanguage = 0;
+
+}

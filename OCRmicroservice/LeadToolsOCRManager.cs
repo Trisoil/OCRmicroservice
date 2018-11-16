@@ -18,6 +18,7 @@ using Leadtools.ImageProcessing.Core;
 using Leadtools.ImageProcessing;
 using Leadtools.Ocr.LEADEngine;
 using Com.Paycasso.Divacs.Protocol;
+using Com.Paycasso;
 
 namespace OCRmicroservice
 {
@@ -153,9 +154,9 @@ namespace OCRmicroservice
         /// <param name="imageBase64String"></param>
         /// <param name="Language"></param>
         /// <returns></returns>
-        public OCRResponse PerformBruteForceOcr(string imageBase64String, String Language)
+        public OcrResponse PerformBruteForceOcr(string imageBase64String, String Language)
         {
-            var ocrResponse = new OCRResponse();
+            var ocrResponse = new OcrResponse();
             try
             {
                 if (_ocrEngineOmnipage == null || _ocrEngineOmnipage.IsStarted == false)
@@ -183,14 +184,13 @@ namespace OCRmicroservice
                         for (int i = 0; i < textOcrZones.Count; i++)
                         {
                             var zone = textOcrZones[i];
-                            DataField dataField = new DataField
+                            OcrRoi dataField = new OcrRoi
                             {
-                                FieldKey = zone.Name ?? "Zone" + i.ToString(),
-                                IsImage = false,
-                                X = Convert.ToSingle(zone.Bounds.X),
-                                Y = Convert.ToSingle(zone.Bounds.Y),
-                                Width = Convert.ToSingle(zone.Bounds.Width),
-                                Height = Convert.ToSingle(zone.Bounds.Height)
+                                Name = zone.Name ?? "Zone" + i.ToString(),
+                                X = zone.Bounds.X,
+                                Y = zone.Bounds.Y,
+                                W = zone.Bounds.Width,
+                                H= zone.Bounds.Height
                             };
                             string value = string.Empty;
 
@@ -206,11 +206,7 @@ namespace OCRmicroservice
                                 Console.WriteLine(ex.Message);
                             }
 
-                            ocrResponse.DataFieldValuePairs.Add(new DataFieldValuePair
-                            {
-                                DataField = dataField,
-                                Value = value
-                            });
+                            ocrResponse.RoiValues.Add(dataField.Name, value) ;
                         }
                     }
                 }
@@ -223,22 +219,37 @@ namespace OCRmicroservice
 
             return ocrResponse;
         }
+
+
+        //public String CaseKindRoi(RoiKind roiKind, OcrZone ocrPage, Country country, RasterImage image)
+        //{
+        //    switch (roiKind)
+        //    {
+        //        case RoiKind.Barcode:
+        //            return niente();
+        //        case RoiKind.Mrz:
+        //            return niente();
+        //        case RoiKind.Text:
+        //            return niente();
+        //        case RoiKind.Unknown:
+        //            return niente();
+        //    }
+        //    return null;
+        //}
+
+        public String ReadTextByCase() { return ""; }
+
         /// <summary>
         /// Perform The ROI and OCR them with the image and the propertymapper(DataField) provided by CE
         /// </summary>
         /// <param name="MachineLearningResponse"></param>
         /// <returns></returns>
-        public OCRResponse PerformTargetedOcr(Response MachineLearningResponse)
+        public OcrResponse PerformTargetedOcr( ref Envelope request)
         {
-            OCRResponse ocrResponse = new OCRResponse();
-            String Language = MachineLearningResponse.Language;
-            String TransactionID = MachineLearningResponse.TransactionID;
-            String DocumentName = MachineLearningResponse.Classification;
-            String imageBase64String = MachineLearningResponse.Images.First(x => x.ImageLabel == ImageLabel.StrictCanonical).Image;
-            String Country = MachineLearningResponse.Country;
-            IList<DataField> textDataFields = MachineLearningResponse.DataFields.ToList();
-            Regex regexMRZ = new Regex("ROI_MRZ");
-            Regex regexBarcode = new Regex("ROI_BARCODE");
+            OcrResponse ocrResponse = new OcrResponse();
+
+      
+            IList<OcrRoi> textDataFields = request.OcrDocument.Rois.ToList();
             String VerticalLeftOrientation = "_VL_";
             if (textDataFields != null && textDataFields.Count > 0)
             {
@@ -255,17 +266,13 @@ namespace OCRmicroservice
                     {
                         StartUpOcrEngineLead();
                     }
-
-                    if (Constants.TestingMode) // this save the image rectified with the rois drawed in a separate test Imagefolder; it is used just for testing
-                    {
-                        DesignRoisResult(ref MachineLearningResponse);
-                    }
+                    
 
                     //set correct language before read the datafields
                     // This is the begginig the control of the language is done just once per document
-                    SetOCRLanguage(Language);
-                    var imageInByte = Convert.FromBase64String(imageBase64String);
-                    using (var mStream = new MemoryStream(imageInByte))
+                    SetOCRLanguage(request.OcrDocument.Language);
+
+                    using (var mStream = new MemoryStream(request.OcrDocument.Image.ToByteArray()))
                     {
                         List<RectangleF> listRois = new List<RectangleF>();
                         Image imageHolder = Image.FromStream((Stream)mStream);
@@ -276,177 +283,142 @@ namespace OCRmicroservice
                             // Set the OCR zones within the rois definitions
                             foreach (var field in textDataFields)
                             {
-                                var zoneOmnipage = new OcrZone();
-                                var zoneLead = new OcrZone();
-                                zoneOmnipage.Name = field.FieldKey;
-                                zoneLead.Name = field.FieldKey;
+                                var zoneOcr = new OcrZone();
+                                zoneOcr.Name = field.Name;
+                                zoneOcr.ZoneType = OcrZoneType.Text;
 
-                                if (field.IsImage == false)
+                                if (field.Name.Contains(VerticalLeftOrientation))// if it a vertical left oriented roi then change the orientation vision for OCR
                                 {
-                                    zoneOmnipage.ZoneType = OcrZoneType.Text;
-                                    zoneLead.ZoneType = OcrZoneType.Text;
+                                    zoneOcr.ViewPerspective = RasterViewPerspective.RightTop;
+                                    zoneOcr.Name = field.Name.Replace(VerticalLeftOrientation, "_");
+                                    field.Name = field.Name.Replace(VerticalLeftOrientation, "_");
                                 }
 
-                                else
-                                {
-                                    zoneOmnipage.ZoneType = OcrZoneType.Graphic;
-                                    zoneLead.ZoneType = OcrZoneType.Graphic;
-                                }
-
-                                if (field.FieldKey.Contains(VerticalLeftOrientation))// if it a vertical left oriented roi then change the orientation vision for OCR
-                                {
-                                    zoneOmnipage.ViewPerspective = RasterViewPerspective.RightTop;
-                                    zoneOmnipage.Name = field.FieldKey.Replace(VerticalLeftOrientation, "_");
-                                    zoneLead.ViewPerspective = RasterViewPerspective.RightTop;
-                                    zoneLead.Name = field.FieldKey.Replace(VerticalLeftOrientation, "_");
-                                    field.FieldKey = field.FieldKey.Replace(VerticalLeftOrientation, "_");
-                                }
-
-                                zoneOmnipage.Bounds = new LeadRect((int)(field.X * ocrPageOmiPage.Width), (int)(field.Y * ocrPageOmiPage.Height), (int)(field.Width * ocrPageOmiPage.Width), (int)(field.Height * ocrPageOmiPage.Height));
-                                zoneLead.Bounds = new LeadRect((int)(field.X * ocrPageLead.Width), (int)(field.Y * ocrPageLead.Height), (int)(field.Width * ocrPageLead.Width), (int)(field.Height * ocrPageLead.Height));
-                                if (zoneLead.ZoneType == OcrZoneType.Text)
-                                {
-                                    ocrPageLead.Zones.Add(zoneLead);
-                                    ocrPageOmiPage.Zones.Add(zoneOmnipage);
-                                }
+                                zoneOcr.Bounds = new LeadRect(field.X ,field.Y , field.W, field.H);
+                                ocrPageLead.Zones.Add(zoneOcr);
+                                ocrPageOmiPage.Zones.Add(zoneOcr);
+                                
                             }
                             ocrPageOmiPage.Recognize(null);
                             ocrPageLead.Recognize(null);
 
+                            
                             for (int i = 0; i < ocrPageOmiPage.Zones.Count; i++)
                             {
                                 var zone = ocrPageOmiPage.Zones[i];
-                                DataField dataField = new DataField
+                                LeadRect logicalRectangle = new LeadRect(zone.Bounds.X, zone.Bounds.Y, zone.Bounds.Width, zone.Bounds.Height);
+                                OcrRoi ocrRoi = new OcrRoi
                                 {
-                                    FieldKey = zone.Name ?? "Zone" + i.ToString(),
-                                    X = Convert.ToSingle(zone.Bounds.X),
-                                    Y = Convert.ToSingle(zone.Bounds.Y),
-                                    Width = Convert.ToSingle(zone.Bounds.Width),
-                                    Height = Convert.ToSingle(zone.Bounds.Height)
+                                    Name = zone.Name ?? "Zone" + i.ToString(),
+                                    X = zone.Bounds.X,
+                                    Y = zone.Bounds.Y,
+                                    W = zone.Bounds.Width,
+                                    H = zone.Bounds.Height,
+                                    Kind = textDataFields.Where(x => x.Name.Equals(zone.Name)).First().Kind
                                 };
-
-                                if (zone.ZoneType == OcrZoneType.Text)
-                                    dataField.IsImage = false;
-                                else
-                                    dataField.IsImage = true;
+                     
 
                                 string value = string.Empty;
 
                                 try
                                 {
-                                    // if it is barcode then call Barcode reader otherwise read as normal text
-                                    if (dataField.FieldKey == "ROI_BARCODE" && dataField.IsImage == false)
+                                    switch (ocrRoi.Kind)
                                     {
-                                        LeadRect logicalRectangle = new LeadRect((int)(dataField.X), (int)(dataField.Y), (int)(dataField.Width), (int)(dataField.Height));
-                                        value = ReadBarcode(imageBase64String, logicalRectangle);
-                                        ocrResponse.DataFieldValuePairs.Add(new DataFieldValuePair
-                                        {
-                                            DataField = dataField,
-                                            Value = value
-                                        });
-                                    }
-
-                                    else if (dataField.FieldKey == "ROI_DATE_OF_BIRTH_VALIDATION" && dataField.IsImage == false)
-                                    {
-                                        LeadRect logicalRectangle = new LeadRect((int)(dataField.X), (int)(dataField.Y), (int)(dataField.Width), (int)(dataField.Height));
-                                        using (RasterImage ROI_DATE_OF_BIRTH_VALIDATION = ResizeCommand(ConvertToRasterRectangle(imageBase64String, logicalRectangle), 100, 20)) // resize the image and convert the rectangle to a RasterImage
-                                        {
-                                            var ocrPageOminipageRect = _ocrEngineOmnipage.CreatePage(ROI_DATE_OF_BIRTH_VALIDATION, OcrImageSharingMode.None);
-                                            var zoneRect = new OcrZone();
-                                            zoneRect.ZoneType = OcrZoneType.Text;
-                                            RasterCodecs codecs = new RasterCodecs();
-                                            zone.Bounds = new LeadRect(0, 0, ocrPageOminipageRect.Width, ocrPageOminipageRect.Height);
-                                            ocrPageOminipageRect.Zones.Add(zone);
-                                            ocrPageOminipageRect.Recognize(null);
-
-                                            String value2 = ocrPageOminipageRect.GetText(0);
-                                            ocrResponse.DataFieldValuePairs.Add(new DataFieldValuePair
+                                        // if it is barcode then call Barcode reader
+                                        case RoiKind.Barcode:
                                             {
-                                                DataField = dataField,
-                                                Value = value2
-                                            });
-                                        }
-                                    }
-
-                                    else if (dataField.FieldKey == "ROI_ADDRESS_GROUP" && Country == "NZL" && dataField.IsImage == false)
-                                    {
-                                        LeadRect logicalRectangle = new LeadRect((int)(dataField.X), (int)(dataField.Y), (int)(dataField.Width), (int)(dataField.Height));
-                                        using (RasterImage ROI_ADDRESS_GROUP = OtsuThresholdCommand(ConvertToRasterRectangle(imageBase64String, logicalRectangle))) // otsu threshold
-                                        {
-                                            var ocrPageOminipageRect = _ocrEngineOmnipage.CreatePage(ROI_ADDRESS_GROUP, OcrImageSharingMode.None);
-                                            var zoneRect = new OcrZone();
-                                            zoneRect.ZoneType = OcrZoneType.Text;
-                                            RasterCodecs codecs = new RasterCodecs();
-                                            zone.Bounds = new LeadRect(0, 0, ocrPageOminipageRect.Width, ocrPageOminipageRect.Height);
-                                            ocrPageOminipageRect.Zones.Add(zone);
-                                            ocrPageOminipageRect.Recognize(null);
-
-                                            String value2 = ocrPageOminipageRect.GetText(0);
-                                            ocrResponse.DataFieldValuePairs.Add(new DataFieldValuePair
-                                            {
-                                                DataField = dataField,
-                                                Value = value2
-                                            });
-                                        }
-                                    }
-
-                                    else if ((dataField.FieldKey == "ROI_LICENCE_TYPE") && Country == "AUVIC" && dataField.IsImage == false)
-                                    {
-                                        LeadRect logicalRectangle = new LeadRect((int)dataField.X, (int)dataField.Y, (int)dataField.Width, (int)dataField.Height);
-                                        using (RasterImage ROI_ADDRESS_GROUP = OtsuThresholdCommand(ConvertToRasterRectangle(imageBase64String, logicalRectangle))) // otsu threshold
-                                        {
-                                            var ocrPageOminipageRect = _ocrEngineOmnipage.CreatePage(ROI_ADDRESS_GROUP, OcrImageSharingMode.None);
-                                            var zoneRect = new OcrZone();
-                                            zoneRect.ZoneType = OcrZoneType.Text;
-                                            RasterCodecs codecs = new RasterCodecs();
-                                            zone.Bounds = new LeadRect(0, 0, ocrPageOminipageRect.Width, ocrPageOminipageRect.Height);
-                                            ocrPageOminipageRect.Zones.Add(zone);
-                                            ocrPageOminipageRect.Recognize(null);
-                                            String value2 = ocrPageOminipageRect.GetText(0);
-
-                                            ocrResponse.DataFieldValuePairs.Add(new DataFieldValuePair
-                                            {
-                                                DataField = dataField,
-                                                Value = value2
-                                            });
-                                        }
-                                    }
-
-                                    else if (dataField.FieldKey == "ROI_MRZ" && dataField.IsImage == false)
-                                    {
-                                        LeadRect logicalRectangle = new LeadRect((int)dataField.X, (int)dataField.Y, (int)dataField.Width, (int)dataField.Height);
-                                        value = TakeMRZ(imageBase64String, logicalRectangle);
-
-                                        ocrResponse.DataFieldValuePairs.Add(new DataFieldValuePair
-                                        {
-                                            DataField = dataField,
-                                            Value = value
-                                        });
-                                    }
-                                    else if (dataField.IsImage == false)
-                                    {
-                                        //read text
-                                        try
-                                        {
-                                            value = ocrPageOmiPage.GetText(i);
-                                            if (value == "")
-                                            {
-                                                value = ocrPageLead.GetText(i);
+                                                value = ReadBarcode(request.OcrDocument.Image.ToByteArray(), logicalRectangle);
+                                                ocrResponse.RoiValues.Add(ocrRoi.Name, value);
+                                                break;
                                             }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            _log.Error("Errors in the final reader" + "; Exception message: " + ex.Message + "; Inner Exception: " + ex.InnerException + "; StackTrace: " + ex.StackTrace.ToString(), ex);
-                                            value = "";
-                                            StartUpOcrEngineOminiPage();
-                                            StartUpOcrEngineLead();
 
-                                        }
-                                        ocrResponse.DataFieldValuePairs.Add(new DataFieldValuePair
-                                        {
-                                            DataField = dataField,
-                                            Value = value
-                                        });
+                                        // if it is MRZ then call MRZ reader
+                                        case RoiKind.Mrz:
+                                            {
+                                                value = TakeMRZ(request.OcrDocument.Image.ToByteArray(), logicalRectangle);
+                                                ocrResponse.RoiValues.Add(ocrRoi.Name, value);
+                                                break;
+                                            }
+
+                                         //  if it is text then call specific image processing and read the text
+                                        case RoiKind.Text:
+                                            {
+
+                                                if (ocrRoi.Name == "ROI_DATE_OF_BIRTH_VALIDATION")
+                                                {
+                                                    using (RasterImage ROI_DATE_OF_BIRTH_VALIDATION = ResizeCommand(ConvertToRasterRectangle(request.OcrDocument.Image.ToByteArray(), logicalRectangle), 100, 20)) // resize the image and convert the rectangle to a RasterImage
+                                                    {
+                                                        var ocrPageOminipageRect = _ocrEngineOmnipage.CreatePage(ROI_DATE_OF_BIRTH_VALIDATION, OcrImageSharingMode.None);
+                                                        var zoneRect = new OcrZone();
+                                                        zoneRect.ZoneType = OcrZoneType.Text;
+                                                        zone.Bounds = new LeadRect(0, 0, ocrPageOminipageRect.Width, ocrPageOminipageRect.Height);
+                                                        ocrPageOminipageRect.Zones.Add(zone);
+                                                        ocrPageOminipageRect.Recognize(null);
+                                                        value = ocrPageOminipageRect.GetText(0);
+                                                    }
+                                                }
+
+                                                else if (ocrRoi.Name == "ROI_ADDRESS_GROUP" && request.OcrDocument.Country.ToString() == "NZL")
+                                                {
+                                                    using (RasterImage ROI_ADDRESS_GROUP = OtsuThresholdCommand(ConvertToRasterRectangle(request.OcrDocument.Image.ToByteArray(), logicalRectangle))) // otsu threshold
+                                                    {
+                                                        var ocrPageOminipageRect = _ocrEngineOmnipage.CreatePage(ROI_ADDRESS_GROUP, OcrImageSharingMode.None);
+                                                        var zoneRect = new OcrZone();
+                                                        zoneRect.ZoneType = OcrZoneType.Text;
+                                                        RasterCodecs codecs = new RasterCodecs();
+                                                        zone.Bounds = new LeadRect(0, 0, ocrPageOminipageRect.Width, ocrPageOminipageRect.Height);
+                                                        ocrPageOminipageRect.Zones.Add(zone);
+                                                        ocrPageOminipageRect.Recognize(null);
+                                                        value = ocrPageOminipageRect.GetText(0);
+                                                    }
+                                                }
+
+                                                else if ((ocrRoi.Name == "ROI_LICENCE_TYPE") && request.OcrDocument.Country.ToString() == "AUVIC")
+                                                {
+                                                    using (RasterImage ROI_ADDRESS_GROUP = OtsuThresholdCommand(ConvertToRasterRectangle(request.OcrDocument.Image.ToByteArray(), logicalRectangle))) // otsu threshold
+                                                    {
+                                                        var ocrPageOminipageRect = _ocrEngineOmnipage.CreatePage(ROI_ADDRESS_GROUP, OcrImageSharingMode.None);
+                                                        var zoneRect = new OcrZone();
+                                                        zoneRect.ZoneType = OcrZoneType.Text;
+                                                        RasterCodecs codecs = new RasterCodecs();
+                                                        zone.Bounds = new LeadRect(0, 0, ocrPageOminipageRect.Width, ocrPageOminipageRect.Height);
+                                                        ocrPageOminipageRect.Zones.Add(zone);
+                                                        ocrPageOminipageRect.Recognize(null);
+                                                        value = ocrPageOminipageRect.GetText(0);
+                                                    }
+                                                }
+
+                                                else
+                                                {
+                                                    //read text
+                                                    try
+                                                    {
+                                                        value = ocrPageOmiPage.GetText(i);
+                                                        if (value == "")
+                                                        {
+                                                            value = ocrPageLead.GetText(i);
+                                                        }
+                                                    }
+                                                    catch (Exception ex)
+                                                    {
+                                                        _log.Error("Errors in the final reader" + "; Exception message: " + ex.Message + "; Inner Exception: " + ex.InnerException + "; StackTrace: " + ex.StackTrace.ToString(), ex);
+                                                        value = "";
+                                                        StartUpOcrEngineOminiPage();
+                                                        StartUpOcrEngineLead();
+                                                    }
+                                                }
+
+                                                ocrResponse.RoiValues.Add(ocrRoi.Name, value);
+                                                break;
+                                            }
+                                            
+                                        // no image processing just read
+                                        case RoiKind.Unknown:
+                                            {
+                                                value = ocrPageOmiPage.GetText(i);
+                                                ocrResponse.RoiValues.Add(ocrRoi.Name, value);
+                                                break;
+                                            }
                                     }
                                 }
                                 catch (Exception ex)
@@ -478,74 +450,74 @@ namespace OCRmicroservice
         /// Draw the result rois in the images
         /// </summary>
         /// <param name="MachineLearningResponse"></param>
-        public void DesignRoisResult(ref Response MachineLearningResponse)
-        {
-            try
-            {
-                var imageInByte = Convert.FromBase64String(MachineLearningResponse.Images.First(x => x.ImageLabel == ImageLabel.StrictCanonical).Image);
-                using (var mStream = new MemoryStream(imageInByte))
-                {
-                    Image imageHolder = Image.FromStream((Stream)mStream);
-                    String TransactionID = MachineLearningResponse.TransactionID;
-                    String DocumentName = MachineLearningResponse.Classification;
-                    String Country = MachineLearningResponse.Country;
-                    IList<DataField> textDataFields = MachineLearningResponse.DataFields.ToList();
+        //public void DesignRoisResult(ref Response MachineLearningResponse)
+        //{
+        //    try
+        //    {
+        //        var imageInByte = Convert.FromBase64String(MachineLearningResponse.Images.First(x => x.ImageLabel == ImageLabel.StrictCanonical).Image);
+        //        using (var mStream = new MemoryStream(imageInByte))
+        //        {
+        //            Image imageHolder = Image.FromStream((Stream)mStream);
+        //            String TransactionID = MachineLearningResponse.TransactionID;
+        //            String DocumentName = MachineLearningResponse.Classification;
+        //            String Country = MachineLearningResponse.Country;
+        //            IList<DataField> textDataFields = MachineLearningResponse.DataFields.ToList();
 
-                    foreach (DataField dataField in textDataFields)
-                    {
-                        Bitmap bitmapImage = Image.FromStream(mStream) as Bitmap;
-                        Rectangle cropRect = new Rectangle((int)(dataField.X * bitmapImage.Width), (int)(dataField.Y * bitmapImage.Height), (int)(dataField.Width * bitmapImage.Width), (int)(dataField.Height * bitmapImage.Height));
-                        // Debugging mode; show the images with the rois drawed in TestImages folder
-                        using (Graphics g = Graphics.FromImage(imageHolder))
-                        {
-                            Color customColorText = Color.FromArgb(254, Color.DarkRed);
-                            SolidBrush shadowBrushText = new SolidBrush(customColorText);
-                            FontFamily fontFamily = new FontFamily("Arial");
-                            g.DrawString(dataField.FieldKey.Replace("ROI_", ""), new Font(fontFamily, 8, FontStyle.Regular, GraphicsUnit.Pixel), shadowBrushText, cropRect);
-                            Color customColorRectangle = Color.FromArgb(50, Color.Black);
-                            dataField.DoodadFound = textDataFields.Where(x => x.FieldKey == dataField.FieldKey).First().DoodadFound;
-                            // show the ROIF/B Red if CE return false otherwise show it as green
-                            if (dataField.IsImage == true && dataField.DoodadFound == false)
-                            {
-                                customColorRectangle = Color.FromArgb(50, Color.Red);
-                            }
-                            if (dataField.IsImage == true && dataField.DoodadFound == true)
-                            {
-                                customColorRectangle = Color.FromArgb(50, Color.Green);
-                            }
+        //            foreach (DataField dataField in textDataFields)
+        //            {
+        //                Bitmap bitmapImage = Image.FromStream(mStream) as Bitmap;
+        //                Rectangle cropRect = new Rectangle((int)(dataField.X * bitmapImage.Width), (int)(dataField.Y * bitmapImage.Height), (int)(dataField.Width * bitmapImage.Width), (int)(dataField.Height * bitmapImage.Height));
+        //                // Debugging mode; show the images with the rois drawed in TestImages folder
+        //                using (Graphics g = Graphics.FromImage(imageHolder))
+        //                {
+        //                    Color customColorText = Color.FromArgb(254, Color.DarkRed);
+        //                    SolidBrush shadowBrushText = new SolidBrush(customColorText);
+        //                    FontFamily fontFamily = new FontFamily("Arial");
+        //                    g.DrawString(dataField.FieldKey.Replace("ROI_", ""), new Font(fontFamily, 8, FontStyle.Regular, GraphicsUnit.Pixel), shadowBrushText, cropRect);
+        //                    Color customColorRectangle = Color.FromArgb(50, Color.Black);
+        //                    dataField.DoodadFound = textDataFields.Where(x => x.FieldKey == dataField.FieldKey).First().DoodadFound;
+        //                    // show the ROIF/B Red if CE return false otherwise show it as green
+        //                    if (dataField.IsImage == true && dataField.DoodadFound == false)
+        //                    {
+        //                        customColorRectangle = Color.FromArgb(50, Color.Red);
+        //                    }
+        //                    if (dataField.IsImage == true && dataField.DoodadFound == true)
+        //                    {
+        //                        customColorRectangle = Color.FromArgb(50, Color.Green);
+        //                    }
 
-                            SolidBrush shadowBrushRectangle = new SolidBrush(customColorRectangle);
-                            g.FillRectangle(shadowBrushRectangle, cropRect);
-                        }
-                    }
-                    DirectoryInfo TestImages = Directory.CreateDirectory(pathDirectoryApp + "\\TestImages");
+        //                    SolidBrush shadowBrushRectangle = new SolidBrush(customColorRectangle);
+        //                    g.FillRectangle(shadowBrushRectangle, cropRect);
+        //                }
+        //            }
+        //            DirectoryInfo TestImages = Directory.CreateDirectory(pathDirectoryApp + "\\TestImages");
 
-                    //one transactin can have 3 different images ,then them need to be saved with different name
-                    if (File.Exists(pathDirectoryApp+"TestImages\\" + TransactionID.ToString() + "_" + DocumentName + ".png"))
-                    {
-                        if (File.Exists(pathDirectoryApp + "TestImages\\" + TransactionID.ToString() + "_2" + DocumentName + ".png"))
-                        {
-                            imageHolder.Save(pathDirectoryApp + "TestImages\\" + TransactionID.ToString() + "_3" + DocumentName + ".png");
-                        }
-                        else
-                            imageHolder.Save(pathDirectoryApp + "TestImages\\" + TransactionID.ToString() + "_2" + DocumentName + ".png");
-                    }
-                    else
-                        imageHolder.Save(pathDirectoryApp + "TestImages\\" + TransactionID.ToString() + "_" + DocumentName + ".png");
-                }
-            }
-            catch (Exception ex)
-            {
-                _log.Error("Error drawing the images: ", ex);
-            }
-        }
+        //            //one transactin can have 3 different images ,then them need to be saved with different name
+        //            if (File.Exists(pathDirectoryApp+"TestImages\\" + TransactionID.ToString() + "_" + DocumentName + ".png"))
+        //            {
+        //                if (File.Exists(pathDirectoryApp + "TestImages\\" + TransactionID.ToString() + "_2" + DocumentName + ".png"))
+        //                {
+        //                    imageHolder.Save(pathDirectoryApp + "TestImages\\" + TransactionID.ToString() + "_3" + DocumentName + ".png");
+        //                }
+        //                else
+        //                    imageHolder.Save(pathDirectoryApp + "TestImages\\" + TransactionID.ToString() + "_2" + DocumentName + ".png");
+        //            }
+        //            else
+        //                imageHolder.Save(pathDirectoryApp + "TestImages\\" + TransactionID.ToString() + "_" + DocumentName + ".png");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _log.Error("Error drawing the images: ", ex);
+        //    }
+        //}
 
         /// <summary>
         /// This function is used to read the barcode.
         /// </summary>
         /// <param name="imageBase64String"></param>
         /// <returns>String  converted from Barcode code, if it is not read then return ""</returns>
-        public String ReadBarcode(string imageBase64String, LeadRect logicalRectangle)
+        public String ReadBarcode(byte[] bytes, LeadRect logicalRectangle)
         {
             string Result = "";
             RasterCodecs rasterCodecs;
@@ -557,7 +529,6 @@ namespace OCRmicroservice
             try
             {
                 rasterCodecs = new RasterCodecs();
-                byte[] bytes = Convert.FromBase64String(imageBase64String);
 
                 //set raster image
                 MemoryStream ms = new MemoryStream(bytes);
@@ -659,10 +630,10 @@ namespace OCRmicroservice
         }
 
         /// <summary>
-        /// Convert image from image64String to MRZ information (line separeted by \n)
+        /// Convert image from image byte[] to MRZ information (line separeted by \n)
         /// </summary>
         /// <param name="imageBase64String"></param>
-        public String TakeMRZ(string imageBase64String, LeadRect logicalRectangle)
+        public String TakeMRZ(byte[] bytes, LeadRect logicalRectangle)
         {
             String Result = "";
             MRTDReader _reader;
@@ -672,7 +643,6 @@ namespace OCRmicroservice
             {
                 _reader = new MRTDReader();
                 _reader.OcrEngine = _ocrEngineLead;
-                byte[] bytes = Convert.FromBase64String(imageBase64String);
                 MemoryStream ms = new MemoryStream(bytes);
                 bitmapImage = Image.FromStream(ms) as Bitmap;
                 // crop image
@@ -717,13 +687,12 @@ namespace OCRmicroservice
         /// <param name="imageBase64String"></param>
         /// <param name="logicalRectangle"></param>
         /// <returns></returns>
-        public RasterImage ConvertToRasterRectangle(string imageBase64String, LeadRect logicalRectangle)
+        public RasterImage ConvertToRasterRectangle( byte[] bytes, LeadRect logicalRectangle)
         {
             Leadtools.RasterImage rasterimageCropped = null;
             Bitmap bitmapImage;
             try
             {
-                byte[] bytes = Convert.FromBase64String(imageBase64String);
                 MemoryStream ms = new MemoryStream(bytes);
                 bitmapImage = Image.FromStream(ms) as Bitmap;
                 // crop image
@@ -936,7 +905,7 @@ namespace OCRmicroservice
         {
             if (bitmap.Height > 30)
             {
-                OCRResponse ocrResponse = new OCRResponse();
+                OcrResponse ocrResponse = new OcrResponse();
                 RasterImage rasterImage = RasterImageConverter.ConvertFromImage(bitmap, ConvertFromImageOptions.None);
                 using (var _ocrPage = _ocrEngineOmnipage.CreatePage(rasterImage, OcrImageSharingMode.AutoDispose))
                 {

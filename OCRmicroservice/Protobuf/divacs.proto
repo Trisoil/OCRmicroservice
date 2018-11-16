@@ -1,29 +1,38 @@
-﻿syntax = "proto3";
+syntax = "proto3";
 
 package com.paycasso.divacs.protocol;
 import "google/protobuf/any.proto";
 
-message Envelope {
-    string correlation_id = 1;
-    google.protobuf.Any payload = 2;
-}
+import public "country.proto";
+import public "document.proto";
 
-message Message {
+import public "localisation.proto";
+import public "classification.proto";
+import public "template.proto";
+import public "rectification.proto";
+import public "ocr.proto";
+import public "roi.proto";
+import public "doccheck.proto";
+
+message Envelope {
     string transaction_id = 1;
     map<string, string> headers = 2;
-    oneof value {
-        ClassifyDocument classify_document = 3;
-        ClassifyOCRResult classify_ocr_result = 4;
-        StartTransactionRequest start_req = 5;
-        ProcessDocumentPartRequest process_req = 6;
-        ProcessDocumentResponse process_resp = 7;
-        ServerSuccess success_resp = 8;
-        ServerFailure failure_resp = 9;
-    };
+    oneof request {
+        LocaliseDocument localise_document = 10;
+        ClassifyDocument classify_document = 11;
+        GetTemplate get_template = 13;
+        RectifyDocument rectify_document = 14;
+        OcrDocument ocr_document = 15;
+        ValidateRois validate_rois = 16;
+        GetDocCheck get_doc_check = 17;
+
+        Response response = 50;
+    }
+    repeated google.protobuf.Any payload = 3;
 }
 
-message ClassifyDocument {
-    string parts = 1;
+message Response {
+    int32 index = 1;
 }
 
 message ClassifyOCRResult {
@@ -123,6 +132,10 @@ enum Tag {
     ENDORSEMENTS = 52;
     PLACE_OF_BIRTH2 = 53;
     PARENTS = 54;
+    COMMERCIAL_CODE= 55;
+    SYMBOLS = 56;
+    REGISTRATION = 57;
+    FIRST_REGISTRATION = 58;
 
     ROI = 99;
 
@@ -191,6 +204,29 @@ enum Tag {
     MRZ18 = 218;
     MRZ19 = 219;
     MRZ20 = 220;
+
+    COMPARISON_CODE = 1000;
+    COMP0001 = 10001;
+    COMP0002 = 10002;
+    COMP0003 = 10003;
+    COMP0004 = 10004;
+    COMP0005 = 10005;
+    COMP0006 = 10006;
+    COMP0007 = 10007;
+    COMP0008 = 10008;
+    COMP0009 = 10009;
+    COMP0010 = 10010;
+    COMP0011 = 10011;
+    COMP0012 = 10012;
+    COMP0013 = 10013;
+    COMP0014 = 10014;
+    COMP0015 = 10015;
+    COMP0016 = 10016;
+    COMP0017 = 10017;
+    COMP0018 = 10018;
+    COMP0019 = 10019;
+
+    UNKNOWN = 65535;
 }
 
 message DocumentCodes {
@@ -203,46 +239,6 @@ message DocumentCode {
     string description = 3;
 }
 
-message Classification {
-    oneof value {
-        ICAODocument icao = 1;
-        Unclassified unclassified = 2;
-		SecondaryDocument secondary = 3;
-    };
-}
-
-message ICAODocument {
-    DocumentType document_type = 1;
-    Country country = 2;
-    string description = 3;
-}
-
-message Unclassified{
-
-}
-
-enum DocumentType {
-    UnknownDocumentType  = 0;
-    IdentityCard = 1;
-    Passport = 2;
-    DrivingLicence = 3;
-	Secondary = 4;
-}
-
-enum Country {
-    UnknownCountry  = 0;
-    MYS = 1;
-    GBR = 2;
-    UKR = 3;
-    UAE = 4;
-    NZL = 5;
-    ESP = 6;
-	HKG = 7;
-	IRL = 8;
-	AUVIC = 9;
-	LTU = 10;
-}
-
 message ServerFailure {
     string message = 1;
     string throwable_as_string = 2;
@@ -250,9 +246,4 @@ message ServerFailure {
 
 message ServerSuccess {
     string message = 1;
-}
-
-message SecondaryDocument {
-    Country country = 1;
-    string description = 2;
 }
