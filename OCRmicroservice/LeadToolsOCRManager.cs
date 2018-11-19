@@ -276,6 +276,7 @@ namespace OCRmicroservice
                     {
                         List<RectangleF> listRois = new List<RectangleF>();
                         Image imageHolder = Image.FromStream((Stream)mStream);
+                        imageHolder.Save("test.jpg");
                         using (RasterImage rasterImage = RasterImageConverter.ConvertFromImage(imageHolder, ConvertFromImageOptions.None))
                         using (var ocrPageOmiPage = _ocrEngineOmnipage.CreatePage(rasterImage, OcrImageSharingMode.None))
                         using (var ocrPageLead = _ocrEngineLead.CreatePage(rasterImage, OcrImageSharingMode.None))
@@ -295,9 +296,15 @@ namespace OCRmicroservice
                                 }
 
                                 zoneOcr.Bounds = new LeadRect(field.X ,field.Y , field.W, field.H);
-                                ocrPageLead.Zones.Add(zoneOcr);
-                                ocrPageOmiPage.Zones.Add(zoneOcr);
-                                
+                                try
+                                {
+                                    ocrPageOmiPage.Zones.Add(zoneOcr);
+                                    ocrPageLead.Zones.Add(zoneOcr);
+                                }
+                                catch(Exception ex)
+                                {
+                                    _log.Error("Invadid Roi region", ex);
+                                }
                             }
                             ocrPageOmiPage.Recognize(null);
                             ocrPageLead.Recognize(null);

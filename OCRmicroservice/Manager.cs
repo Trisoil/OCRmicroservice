@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Google.Protobuf;
 using System.IO;
 using System.Drawing;
+using Google.Protobuf.WellKnownTypes;
 
 namespace OCRmicroservice
 {
@@ -104,17 +105,17 @@ namespace OCRmicroservice
                 var config = new ProducerConfig { BootstrapServers = Constants.KafkaBootstrapServers };
                 using (var p = new Producer<Null, byte[]>(config))
                 {
-                    for (int i = 0; i < 2; ++i)
-                    {
+                    //for (int i = 0; i < 2; ++i)
+                    //{
                         try
                         {
                          
                             var dr = await p.ProduceAsync(Constants.ProducerTopic, new Message<Null, byte[]> { Value = envelope.ToByteArray() });
 
-                            lock (log)
-                            {
+                            //lock (log)
+                            //{
                                 log.Info("transactionID" + envelope.TransactionId+ " succesfully delivered");
-                            }                         
+                            //}                         
                         }
                         catch (KafkaException e)
                         {
@@ -123,7 +124,7 @@ namespace OCRmicroservice
                                 log.Error($"Delivery failed to Kafka: {e.Error.Reason}");
                             }                           
                         }
-                    }
+                    //}
                 }
             }
             catch(Exception ex)
@@ -146,7 +147,17 @@ namespace OCRmicroservice
             {
                 log.Info("start to converting the kafka message to protobuf message");
                 request = Envelope.Parser.ParseFrom(ProtobufMex);
+                answer = request;
                 log.Info("End succesfully conversion protobuf message");
+                log.Info("TransactionID: " + request.TransactionId);
+                log.Info("Country: " + request.OcrDocument.Country);
+                log.Info("Language: " + request.OcrDocument.Language);
+                log.Info("ROIS received:");
+                foreach (var field in request.OcrDocument.Rois)
+                {
+                    log.Info("ROIS: Name " + field.Name + "; ROI Kind" + field.Kind+ "; X:" + field.X.ToString() + "; Y:" + field.Y.ToString() + "; Width:" + field.W.ToString() + "; Height:" + field.H.ToString());
+                }
+                
             }
             catch (Exception ex)
             {
@@ -186,6 +197,16 @@ namespace OCRmicroservice
 
                 //Start OCR
                 ocrResponse = StartOCR();
+
+                //Print result and save into Pyaload
+                if (ocrResponse !=null)
+                {
+                    foreach (var field in ocrResponse.RoiValues)
+                    {
+                        log.Info("**OCR Result for: " + field.Key+ " => "+ field.Value);
+                    }
+                    answer.Payload.Add(Any.Pack(ocrResponse));
+                }                
 
                 //SendAnswer in background and continuos new jobs
                 Task SendAnswer = SendObject(answer);

@@ -42,7 +42,7 @@ namespace OCRmicroservice
                 catch 
                 {
                     //this is just for unit test project
-                    return "CE_Results";
+                    return "OCR_Results";
                 }
               
             }
