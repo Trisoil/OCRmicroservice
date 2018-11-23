@@ -95,11 +95,14 @@
     </Reference>
     <Reference Include="Leadtools.Barcode, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>LeadtoolsDependency\Leadtools.Barcode.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\LEADTOOLS 20\Bin\Dotnet4\x64\Leadtools.Barcode.dll</HintPath>
     </Reference>
     <Reference Include="Leadtools.Barcode.OneD, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>LeadtoolsDependency\Leadtools.Barcode.OneD.dll</HintPath>
+    </Reference>
+    <Reference Include="Leadtools.Barcode.PdfRead">
+      <HintPath>..\..\..\..\..\..\LEADTOOLS 20\Bin\Dotnet4\x64\Leadtools.Barcode.PdfRead.dll</HintPath>
     </Reference>
     <Reference Include="Leadtools.Codecs, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
@@ -224,17 +227,17 @@
     <Compile Include="ProjectInstaller.Designer.cs">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
-    <Compile Include="Protobuf\Classification.cs" />
-    <Compile Include="Protobuf\Country.cs" />
-    <Compile Include="Protobuf\Divacs.cs" />
+    <Compile Include="Protobuf\Compiled\Classification.cs" />
+    <Compile Include="Protobuf\Compiled\Country.cs" />
+    <Compile Include="Protobuf\Compiled\Divacs.cs" />
     <Compile Include="Manager.cs" />
-    <Compile Include="Protobuf\Doccheck.cs" />
-    <Compile Include="Protobuf\Document.cs" />
-    <Compile Include="Protobuf\Localisation.cs" />
-    <Compile Include="Protobuf\Ocr.cs" />
-    <Compile Include="Protobuf\Rectification.cs" />
-    <Compile Include="Protobuf\Roi.cs" />
-    <Compile Include="Protobuf\Template.cs" />
+    <Compile Include="Protobuf\Compiled\Doccheck.cs" />
+    <Compile Include="Protobuf\Compiled\Document.cs" />
+    <Compile Include="Protobuf\Compiled\Localisation.cs" />
+    <Compile Include="Protobuf\Compiled\Ocr.cs" />
+    <Compile Include="Protobuf\Compiled\Rectification.cs" />
+    <Compile Include="Protobuf\Compiled\Roi.cs" />
+    <Compile Include="Protobuf\Compiled\Template.cs" />
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -249,13 +252,13 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Protobuf\classification.proto" />
-    <None Include="Protobuf\country.proto" />
-    <None Include="Protobuf\divacs.proto" />
-    <None Include="Protobuf\doccheck.proto" />
-    <None Include="Protobuf\document.proto" />
-    <None Include="Protobuf\localisation.proto" />
-    <None Include="Protobuf\MessageDefinitions.proto" />
+    <None Include="Protobuf\File\classification.proto" />
+    <None Include="Protobuf\File\country.proto" />
+    <None Include="Protobuf\File\divacs.proto" />
+    <None Include="Protobuf\File\doccheck.proto" />
+    <None Include="Protobuf\File\document.proto" />
+    <None Include="Protobuf\File\localisation.proto" />
+    <None Include="Protobuf\File\MessageDefinitions.proto" />
     <Content Include="LeadtoolsDependency\Dependency\LEADTOOLS.lic">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1966,10 +1969,10 @@
     <Content Include="LeadtoolsDependency\Dependency\OcrOmniPageRuntime64\zbigramk.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Protobuf\ocr.proto" />
-    <None Include="Protobuf\rectification.proto" />
-    <None Include="Protobuf\roi.proto" />
-    <None Include="Protobuf\template.proto" />
+    <None Include="Protobuf\File\ocr.proto" />
+    <None Include="Protobuf\File\rectification.proto" />
+    <None Include="Protobuf\File\roi.proto" />
+    <None Include="Protobuf\File\template.proto" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

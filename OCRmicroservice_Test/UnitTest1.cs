@@ -16,23 +16,17 @@ namespace OCRmicroservice.Tests
     public class UnitTest1
     {
 
-        //[TestMethod()]
-        //public void PerformTargetedOcrTest()
-        //{
-        //    Assert.Fail();
-        //}
-
-        //[TestMethod()]
-        //public void TestMainTest()
-        //{
-        //    ILog log;
-        //    log4net.Config.XmlConfigurator.Configure();
-        //    log = LogManager.GetLogger(typeof(Program));
-        //    log.Info("Start APP OCR microservice");
-        //    Manager manager = new Manager(log);
-        //    manager.Start();
-        //    Assert.Fail();
-        //}
+        [TestMethod()]
+        public void TestMainTest()
+        {
+            ILog log;
+            log4net.Config.XmlConfigurator.Configure();
+            log = LogManager.GetLogger(typeof(Program));
+            log.Info("Start APP OCR microservice");
+            Manager manager = new Manager(log);
+            manager.Start();
+            Assert.Fail();
+        }
 
         [TestMethod()]
         public void SendObjectTest()
@@ -42,73 +36,13 @@ namespace OCRmicroservice.Tests
             log = LogManager.GetLogger(typeof(Program));
             log.Info("Start APP OCR microservice");
             Manager manager = new Manager(log);
-          //  Task SendAnswer = manager.SendObject(FakeEnvelopeBroken());
+            Task SendAnswer = manager.SendObject(FakeEnvelopeAAMVA());
          //   Task SendAnswer2 = manager.SendObject(FakeEnvelope());
             manager.Start();
             //SendAnswer.Wait();
 
         }
 
-        //public Com.Paycasso.Divacs.Protocol.Envelope GenerateEnvelope()
-        //{
-        //    return new Com.Paycasso.Divacs.Protocol.Envelope();
-        //}
-
-        //[TestMethod()]
-        //public void ConsumingTest()
-        //{
-        //    ILog log;
-        //    log4net.Config.XmlConfigurator.Configure();
-        //    log = LogManager.GetLogger(typeof(Program));
-        //    log.Info("Start APP OCR microservice");
-        //    Manager manager = new Manager(log);
-            
-           
-
-        //}
-
-        //[TestMethod()]
-        //public void Consuming( Offset offset)
-        //{
-        //  //  log.Info("Waiting new Kafka messages");
-        //    ConsumerConfig Consumerconf = new Confluent.Kafka.ConsumerConfig
-        //    {
-        //        GroupId = Constants.GroupID,
-        //        BootstrapServers = "localhost:9092",
-        //        // Note: The AutoOffsetReset property determines the start offset in the event
-        //        // there are not yet any committed offsets for the consumer group for the
-        //        // topic/partitions of interest. By default, offsets are committed
-        //        // automatically, so in this example, consumption will only start from the
-        //        // eariest message in the topic 'my-topic' the first time you run the program.
-        //        AutoOffsetReset = AutoOffsetResetType.Earliest
-        //    };
-        //    using (var consumer = new Consumer<Ignore, byte[]>(Consumerconf))
-        //    {
-              
-        //        bool consuming = true;
-
-        //        // The client will automatically recover from non-fatal errors. You typically
-        //        // don't need to take any action unless an error is marked as fatal.
-        //        consumer.OnError += (_, e) => consuming = !e.IsFatal;
-
-        //        while (consuming && true)
-        //        {
-        //            try
-        //            {
-        //                var cr = consumer.Consume();
-
-        //                // do job
-        //               // DoJob(cr.Value);
-        //            }
-        //            catch (ConsumeException e)
-        //            {
-        //              //  log.Error($"Error occured receiving kafka mex: {e.Error.Reason}");
-        //            }
-        //        }
-        //        // Ensure the consumer leaves the group cleanly and final offsets are committed.
-        //        consumer.Close();
-        //    }
-        //}
 
         public static Com.Paycasso.Divacs.Protocol.Envelope FakeEnvelope()
 
@@ -219,5 +153,37 @@ namespace OCRmicroservice.Tests
 
             return fake;
         }
+
+
+        public static Com.Paycasso.Divacs.Protocol.Envelope FakeEnvelopeAAMVA()
+
+        {
+            Com.Paycasso.Divacs.Protocol.Envelope fake = new Com.Paycasso.Divacs.Protocol.Envelope();
+            fake.OcrDocument = new OcrDocument();
+            fake.OcrDocument.Country = Country.Ltu;
+            fake.OcrDocument.Language = "English";
+            OcrRoi barcode = new OcrRoi();
+            barcode.Kind = RoiKind.Barcode;
+            barcode.Name = "ROI_BARCODE";
+            barcode.X = 1;
+            barcode.Y = 1;
+            barcode.W = 1122;
+            barcode.H = 238;    
+            fake.OcrDocument.Rois.Add(barcode);
+
+
+            Image image = Image.FromFile("C:\\Users\\PaoloCiliberto\\Pictures\\kentucky\\AAMVA.jpg");
+            var ms = new MemoryStream();
+            image.Save(ms, image.RawFormat);
+            //ms.ToArray();
+
+            // fake.OcrDocument.Image = ByteString.CopyFrom(ms.ToArray());
+
+
+            fake.OcrDocument.Image = ByteString.CopyFrom(ms.ToArray());
+
+            return fake;
+        }
+
     }
 }

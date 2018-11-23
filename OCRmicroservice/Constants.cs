@@ -36,7 +36,7 @@ namespace OCRmicroservice
             {
                 try
                 {
-                    return ConfigurationManager.AppSettings["ConsumerTopic"].ToString();
+                    return ConfigurationManager.AppSettings["CE_Results"].ToString();
                 }
                 
                 catch 
@@ -54,14 +54,13 @@ namespace OCRmicroservice
             {
                 try
                 {
-                    return ConfigurationManager.AppSettings["ProducerTopic"].ToString();
+                    return ConfigurationManager.AppSettings["OCR_Results"].ToString();
                 }
                 catch
                 {
                     //this is just for unit test project
                     return "OCR_Results";
-                }
-              
+                }            
             }
         }
 

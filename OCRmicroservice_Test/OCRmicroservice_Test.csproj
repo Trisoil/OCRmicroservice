@@ -68,10 +68,13 @@
     </Reference>
     <Reference Include="Leadtools.Barcode, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\OCRmicroservice\LeadtoolsDependency\Leadtools.Barcode.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\LEADTOOLS 20\Bin\Dotnet4\x64\Leadtools.Barcode.dll</HintPath>
     </Reference>
     <Reference Include="Leadtools.Barcode.OneD">
       <HintPath>..\OCRmicroservice\LeadtoolsDependency\Leadtools.Barcode.OneD.dll</HintPath>
+    </Reference>
+    <Reference Include="Leadtools.Barcode.PdfRead">
+      <HintPath>..\..\..\..\..\..\LEADTOOLS 20\Bin\Dotnet4\x64\Leadtools.Barcode.PdfRead.dll</HintPath>
     </Reference>
     <Reference Include="Leadtools.Codecs, Version=20.0.4.0, Culture=neutral, PublicKeyToken=9cf889f53ea9b907, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>

@@ -519,11 +519,67 @@ namespace OCRmicroservice
         //    }
         //}
 
+
+        private String ReadBarcodesAAMVA(byte[] bytes, LeadRect logicalRectangle )//,BarcodeReader reader, RasterImage image)
+        {
+            // Setup read options 
+            PDF417BarcodeReadOptions options = new PDF417BarcodeReadOptions();
+            options.SearchDirection = BarcodeSearchDirection.HorizontalAndVertical;
+            options.EnableDoublePass = true;
+            options.EnableFastMode = false;
+            options.ReadMode = PDF417BarcodeReadMode.Mode0;
+            options.ReturnCorruptedSymbolArea = false;
+            options.ReadOptionalMacroFileNameField = false;
+            options.ReadOptionalMacroSegmentCountField = false;
+            options.ReadOptionalMacroTimestampField = false;
+            options.ReadOptionalMacroSenderField = false;
+            options.ReadOptionalMacroAddresseeField = false;
+            options.ReadOptionalMacroFileSizeField = false;
+            options.ReadOptionalMacroChecksumField = false;
+            options.ReadOptionalMacro79AndAZField = false;
+
+            Console.WriteLine("Reading Barcodes");
+
+            BarcodeEngine engine = new BarcodeEngine();
+            // readOptions as MicroPDF417BarcodeReadOptions).EnableDoublePass = useDoublePass;
+            //   BarcodeEngine engine = new BarcodeEngine();
+
+            //BarcodeData[] barcodes = engine.Reader.ReadBarcodes(image, LeadRect.Empty, 0, new BarcodeSymbology[] { BarcodeSymbology.PDF417 }, new BarcodeReadOptions[] { options });
+            //Console.WriteLine("{0} barcodes found:", barcodes.Length);
+            //return barcodes[0].Value.ToString();
+            //foreach (PDF417BarcodeData barcode in barcodes)
+            //{
+            //    Console.WriteLine(" At {0} and data: {1}", barcode.Bounds, barcode.Value);
+            return "";
+            //}
+        }
+
+    
+
+
+        public RasterImage Deskew(RasterImage image)
+        {
+            // Load an image 
+            //RasterCodecs codecs = new RasterCodecs();
+            //codecs.ThrowExceptionsOnInvalidImages = true;
+
+            //RasterImage image = codecs.Load(Path.Combine(LEAD_VARS.ImagesDir, "Clean.tif"));
+
+            // Prepare the command 
+            DeskewCommand command = new DeskewCommand();
+            //Deskew the image. 
+            command.Flags = DeskewCommandFlags.DeskewImage | DeskewCommandFlags.DoNotFillExposedArea;
+            command.Run(image);
+            return image;
+
+        }
+
         /// <summary>
-        /// This function is used to read the barcode.
+        /// Read barcode methods
         /// </summary>
-        /// <param name="imageBase64String"></param>
-        /// <returns>String  converted from Barcode code, if it is not read then return ""</returns>
+        /// <param name="bytes"></param>
+        /// <param name="logicalRectangle"></param>
+        /// <returns></returns>
         public String ReadBarcode(byte[] bytes, LeadRect logicalRectangle)
         {
             string Result = "";
@@ -635,6 +691,7 @@ namespace OCRmicroservice
             }
             return Result;
         }
+
 
         /// <summary>
         /// Convert image from image byte[] to MRZ information (line separeted by \n)
